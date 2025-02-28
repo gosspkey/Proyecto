@@ -119,6 +119,7 @@ input::placeholder{
     padding: 10px 70px;
     margin-left: 10px;
     text-align: center;
+    margin-top: 1000px;
 }
 footer p{
     color: #EF6C00;
@@ -247,6 +248,7 @@ footer {
 
 .text-center{
     width: 100%;
+    margin-top: 100px;
     height: auto;
     text-align: center;
     margin-top: 100px;
