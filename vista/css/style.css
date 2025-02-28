@@ -345,4 +345,43 @@ h2{
     padding: absolute;
   }
 
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: justify;
+}
+
+.custom-table th, .custom-table td {
+    padding: 12px 15px;
+    border: 1px solid #fcfafa;
+}
+
+.custom-table thead {
+    background-color: #315f67;
+    color: #ffffff;
+}
+
+
+.custom-table tbody tr:hover {
+    background-color: #71b2be;
+}
+
+.custom-button {
+    background-color: rgb(17, 138, 118);
+    color: rgb(0, 0, 0);
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 10px 14px;
+    border: none;
+    margin: 10px;
+    display:inline-flex;
+}
+
+.custom-button:hover{
+    background-color: #ddd;
+}
+
   
