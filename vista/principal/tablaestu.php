@@ -44,7 +44,7 @@ if (!$usu || $usu->rowCount()==0){
 
 
         echo "<h1>Estudiantes</h1>";
-        echo "<link rel='stylesheet' href='estilo.css'>";
+        echo "<link rel='stylesheet' href='../css/style.css'>";
         echo "<table class = 'custom-table'>";
         echo "<thead>
                 <tr>
