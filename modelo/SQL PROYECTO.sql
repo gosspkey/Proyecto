@@ -15,6 +15,19 @@ Rol enum ('Estudiante','Administrador') not null,
 Contraseña  varchar(100) not null
 );
 describe Usuario;
+
+create table Instructores(
+IDinstructor int primary key auto_increment not null,
+Nombre varchar (100) not null,
+Apellido varchar(100) not null,
+Identificacion enum('C.C','T.I','C.E','P.P.T') NOT NULL,
+Documento varchar(100) not null,
+Email varchar(100) not null,
+Usuario  varchar(100) not null,
+Contraseña  varchar(100) not null
+);
+describe Instructores;
+
 create table Equipos(
 CodEquipo int primary key auto_increment not null,
 Descripcion text,

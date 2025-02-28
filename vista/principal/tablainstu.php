@@ -22,7 +22,7 @@
                         <a class="nav-link" href="admin.html">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tablainstu.php">Tabla Instructores</a>
+                        <a class="nav-link" href="tablaestu.php">Tabla Estudiantes</a>
                     </li>
                 </ul>
             </div>
@@ -30,20 +30,20 @@
         </nav>
 
 <?php
-require_once('../../modelo/usuario.php');
+require_once('../../modelo/instructor.php');
 require_once('../../confi/conexion.php');
 $database = new Database();
 $db = $database->getConnection();
-$usuario= new Usuario($db);
-$usu = $usuario->listarusu();
+$Instructores= new Instructores($db);
+$ins = $Instructores->listarins();
 
-if (!$usu || $usu->rowCount()==0){
+if (!$ins || $ins->rowCount()==0){
     echo "No hay usuarios registrados";
 }else
 {
 
 
-        echo "<h1>Estudiantes</h1>";
+        echo "<h1>Instructores</h1>";
         echo "<link rel='stylesheet' href='estilo.css'>";
         echo "<table class = 'custom-table'>";
         echo "<thead>
@@ -53,34 +53,28 @@ if (!$usu || $usu->rowCount()==0){
                     <th>Apellido</th>
                     <th>Tipo de identificacion</th>
                     <th>Documento</th>
-                    <th>Telefono</th>
                     <th>Email</th>
-                    <th>Ficha</th>
                     <th>Usuario</th>
-                    <th>Rol</th>
                     <th>Contraseña</th>
 
                 </tr>
             </thead>";
 
-             while($f = $usu->fetch(PDO::FETCH_ASSOC)){
+             while($f = $ins->fetch(PDO::FETCH_ASSOC)){
 
                echo "<tr>
-                    <td>".$f["IDUsuario"]. "</td>
-                    <td>".$f["Nombre"]. "</td>
-                    <td>".$f["Apellido"]. "</td>
-                    <td>".$f["Identificacion"]. "</td>
-                    <td>".$f["Documento"]. "</td>
-                    <td>".$f["Telefono"]. "</td>
-                    <td>".$f["Email"]. "</td>
-                    <td>".$f["Ficha"]. "</td>
-                    <td>".$f["Usuario"]. "</td>
-                    <td>".$f["Rol"]. "</td>
-                    <td>".$f["Contraseña"]. "</td>
+                    <td>".$f["IDinstructor"]. "</td>
+                    <td>".$f["Nombrein"]. "</td>
+                    <td>".$f["Apellidoin"]. "</td>
+                    <td>".$f["Identificacionin"]. "</td>
+                    <td>".$f["Documentoin"]. "</td>
+                    <td>".$f["Emailin"]. "</td>
+                    <td>".$f["Usuarioin"]. "</td>
+                    <td>".$f["Contraseñain"]. "</td>
                     <td>
 
-                    <a href='actualizar.php?id=" . $f["IDUsuario"] . "' class='custom-button'>Actualizar</a>
-                    <a href='borrar.php?id=" . $f["IDUsuario"] . "' class='custom-button'>Borrar</a>
+                    <a href='actualizar.php?id=" . $f["IDinstructor"] . "' class='custom-button'>Actualizar</a>
+                    <a href='borrar.php?id=" . $f["IDinstructor"] . "' class='custom-button'>Borrar</a>
 
          
 
