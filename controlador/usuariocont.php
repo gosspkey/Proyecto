@@ -55,7 +55,7 @@ class UsuarioControlador {
             // Redirigir según el rol
             ob_start(); // Inicia el buffer de salida
             if ($_SESSION['rol'] === 'Administrador') {
-                header("Location:../vista/principal/admin.php");
+                header("Location:../vista/principal/admin.html");
                 ob_end_flush(); // Enviar el buffer de salida
                 exit;
             } elseif ($_SESSION['rol'] === 'Estudiante') {
