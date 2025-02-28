@@ -208,7 +208,8 @@ footer {
     background-position: center; /* Centra la imagen */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
     height: 100%; /* Ocupa toda la altura del contenedor */
-    width: 100%; /* Ocupa todo el ancho del contenedor */
+    width: 100%;
+     /* Ocupa todo el ancho del contenedor */
     position: absolute;
     top: 0;
     left: 0;
@@ -246,9 +247,11 @@ footer {
 
 .text-center{
     width: 100%;
-height: auto;
+    height: auto;
     text-align: center;
+    margin-top: 100px;
 }
+
 
 h2{
     text-align: center;
@@ -345,6 +348,7 @@ h2{
     padding: absolute;
   }
 
+<<<<<<< HEAD
 .custom-table {
     width: 100%;
     border-collapse: collapse;
@@ -385,3 +389,6 @@ h2{
 }
 
   
+=======
+  
+>>>>>>> 26b71ad9e646954158cb1b01a9ab1495b4554fa4
