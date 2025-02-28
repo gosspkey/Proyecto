@@ -43,7 +43,7 @@ class UsuarioControlador {
         $this->ins->apellidoin = $data['apellidoin'];
         $this->ins->identiin = $data['identiin'];
         $this->ins->documentoin = $data['documentoin'];
-        $this->ins->emailin = $data['correoin'];
+        $this->ins->emailin = $data['emailin'];
         $this->ins->usuarioin = $data['usuarioin'];
         $this->ins->contrain = $data['contraseñain'];
 
