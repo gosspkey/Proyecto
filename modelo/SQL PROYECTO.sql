@@ -11,6 +11,7 @@ Telefono varchar(100) not null,
 Email varchar(100) not null,
 Ficha varchar(100) not null,
 Usuario  varchar(100) not null,
+Rol enum ('Estudiante','Administrador') not null,
 Contraseña  varchar(100) not null
 );
 describe Usuario;

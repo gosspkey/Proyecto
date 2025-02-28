@@ -11,6 +11,7 @@ class Usuario {
     public $email;
     public $ficha;
     public $usuario;
+    public $rol;
     public $contra;
 
     // Constructor para inicializar la conexión
@@ -26,8 +27,8 @@ class Usuario {
         }
 
         // Crear la sentencia SQL
-        $query = "INSERT INTO " . $this->table . " (Nombre, Apellido, Identificacion, Documento, Telefono, Email, Ficha, Usuario, Contraseña) 
-        VALUES (:nombre, :apellido, :identi, :documento, :telefono, :email, :ficha, :usuario, :contra)";
+        $query = "INSERT INTO " . $this->table . " (Nombre, Apellido, Identificacion, Documento, Telefono, Email, Ficha, Usuario, Rol, Contraseña) 
+        VALUES (:nombre, :apellido, :identi, :documento, :telefono, :email, :ficha, :usuario, :rol, :contra)";
         $res = $this->conn->prepare($query);
 
         // Encriptar los datos
@@ -39,6 +40,7 @@ class Usuario {
         $this->email = isset($this->email) ? htmlspecialchars(strip_tags($this->email)) : '';
         $this->ficha = isset($this->ficha) ? htmlspecialchars(strip_tags($this->ficha)) : '';
         $this->usuario = isset($this->usuario) ? htmlspecialchars(strip_tags($this->usuario)) : '';
+        $this->rol = isset($this->rol) ? htmlspecialchars(strip_tags($this->rol)) : '';
         $this->contra = isset($this->contra) ? password_hash($this->contra, PASSWORD_BCRYPT) : '';
 
         // Vincular parámetros
@@ -50,6 +52,7 @@ class Usuario {
         $res->bindParam(':email', $this->email);
         $res->bindParam(':ficha', $this->ficha);
         $res->bindParam(':usuario', $this->usuario);
+        $res->bindParam(':rol', $this->rol);
         $res->bindParam(':contra', $this->contra);
 
         // Ejecutar la consulta
@@ -95,7 +98,7 @@ class Usuario {
     // Función para ingresar (iniciar sesión)
     public function ingresar() {
         // Crear la consulta SQL para obtener el usuario por nombre de usuario
-        $query = "SELECT IDUsuario, Usuario, Email, Contraseña FROM " . $this->table . " WHERE Usuario = :usuario LIMIT 1";
+        $query = "SELECT IDUsuario, Usuario, Rol, Contraseña FROM " . $this->table . " WHERE Usuario = :usuario LIMIT 1";
         $resul = $this->conn->prepare($query);
 
         // Limpiar los datos del usuario
@@ -116,6 +119,7 @@ class Usuario {
                 // Asignar los datos del usuario a las propiedades de la clase
                 $this->id = $fil['IDUsuario'];
                 $this->usuario = $fil['Usuario'];
+                $this->rol = $fil['Rol'];
                 $this->contra = $fil['Contraseña'];
 
                 return true; // Ingreso exitoso

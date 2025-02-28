@@ -23,6 +23,7 @@ class UsuarioControlador {
         $this->usu->email = $data['correo'];
         $this->usu->ficha = $data['ficha'];
         $this->usu->usuario = $data['usuario'];
+        $this->usu->rol = $data["rol"];
         $this->usu->contra = $data['contraseña'];
 
         if ($this->usu->crearusu()) {
@@ -44,16 +45,24 @@ class UsuarioControlador {
             // Definir las variables de sesión
             $_SESSION['id'] = $this->usu->id;
             $_SESSION['usuario'] = $this->usu->usuario;
-            $_SESSION['correo'] = $this->usu->email;
+            $_SESSION['rol'] = $this->usu->rol;
 
             // Verificar que las variables de sesión están establecidas
             echo "ID del usuario en sesión: " . $_SESSION['id'] . "<br>";
             echo "usuario: " . $_SESSION['usuario'] . "<br>";
             echo "correo: " . $_SESSION['correo'] . "<br>";
 
-            header("Location: ../vista/principal/equipos.html");
-            ob_end_flush(); // Enviar el buffer de salida
-            exit;
+            // Redirigir según el rol
+            ob_start(); // Inicia el buffer de salida
+            if ($_SESSION['rol'] === 'Administrador') {
+                header("Location:../vista/principal/admin.php");
+                ob_end_flush(); // Enviar el buffer de salida
+                exit;
+            } elseif ($_SESSION['rol'] === 'Estudiante') {
+                header("Location: ../vista/principal/equipos.html");
+                ob_end_flush(); // Enviar el buffer de salida
+                exit;
+            } 
         } else {
             echo "Error: Credenciales incorrectas";
         }
