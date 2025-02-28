@@ -119,6 +119,7 @@ input::placeholder{
     padding: 10px 70px;
     margin-left: 10px;
     text-align: center;
+    margin-top: 1000px;
 }
 footer p{
     color: #EF6C00;
@@ -208,7 +209,8 @@ footer {
     background-position: center; /* Centra la imagen */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
     height: 100%; /* Ocupa toda la altura del contenedor */
-    width: 100%; /* Ocupa todo el ancho del contenedor */
+    width: 100%;
+     /* Ocupa todo el ancho del contenedor */
     position: absolute;
     top: 0;
     left: 0;
@@ -246,9 +248,12 @@ footer {
 
 .text-center{
     width: 100%;
-height: auto;
+    margin-top: 100px;
+    height: auto;
     text-align: center;
+    margin-top: 100px;
 }
+
 
 h2{
     text-align: center;
@@ -345,3 +350,53 @@ h2{
     padding: absolute;
   }
 
+<<<<<<< HEAD
+=======
+  .custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #f7f9fa; 
+    border-radius: 10px; 
+    overflow: hidden;
+}
+
+.custom-table th, .custom-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; 
+}
+
+.custom-table th {
+    background-color: #5EA617; 
+    color: #fff; 
+    font-weight: bold;
+}
+
+.custom-table tbody tr:nth-child(even) {
+    background-color: #ebf2e3; 
+}
+
+.custom-table tbody tr:hover {
+    background-color: #d4e5b3; 
+}
+
+.custom-table a.custom-button {
+    color: #5EA617; 
+    background-color: #f7f9fa; 
+    padding: 8px 16px;
+    border: 1px solid #5EA617; 
+    border-radius: 20px; 
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px 0;
+    text-align: center;
+    transition: all 0.3s ease; 
+}
+
+.custom-table a.custom-button:hover {
+    background-color: #5EA617; 
+    color: #fff; 
+}
+>>>>>>> f08ef11571d4f2d86fd8686bdad8f3bbd8448fe9
