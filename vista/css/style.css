@@ -409,7 +409,16 @@ h2{
 
 
     .small-image {
-        width: 2000px; /* Ajusta el tamaño según tus necesidades */
-        border-color: black;
+
+        background-color: #5c9b1e;
         border-radius: 19px;
+        width: 200px; /* Ajusta el tamaño según tus necesidades */
+        height: auto;
+    }
+
+    .text-center-vertical {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
