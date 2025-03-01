@@ -398,3 +398,11 @@ h2{
     background-color: #5EA617; 
     color: #fff; 
 }
+
+
+.tituo{
+    font-size: 6.66666667vw;
+    font:  sans-serif;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
