@@ -406,3 +406,10 @@ h2{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
 }
+
+
+    .small-image {
+        width: 2000px; /* Ajusta el tamaño según tus necesidades */
+        border-color: black;
+        border-radius: 19px;
+    }
