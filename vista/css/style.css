@@ -422,3 +422,64 @@ h2{
         justify-content: center;
         text-align: center;
     }
+    .fondoo{
+        background-image: url(../img/sena-aprendizaje-1.jpg);
+        background-size: cover;
+    }
+
+    .carousel-item img {
+        transition: transform 0.5s ease;
+    }
+    .carousel-item:hover img {
+        transform: scale(1.1);
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: 400px; /* Ajusta la altura según tus necesidades */
+        object-fit: cover;
+    }
+    .carousel-caption {
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para el texto */
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .carousel-item img {
+                width: 100%;
+                height: 400px; /* Ajusta la altura según tus necesidades */
+                object-fit: cover;
+            }
+            .carousel-caption {
+                background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para el texto */
+                padding: 20px;
+                border-radius: 10px;
+            }
+
+            .small-carousel {
+                max-width: 400px; /* Ajusta el tamaño según tus necesidades */
+                margin: auto;
+            }
+            .small-carousel img {
+                max-height: 300px; /* Ajusta la altura según tus necesidades */
+                object-fit: cover;
+            }
+
+               
+            .zoom {
+                transition: transform 0.5s ease-in-out;
+            }
+    
+            .zoom:hover {
+                transform: scale(1.2);
+            }
+            footer {
+                width: 100%;
+                background-color: #f8f9fa; /* Cambia el color de fondo según tus necesidades */
+                padding: 20px 0;
+            }
+    
+            .footer-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 15px;
+            }
