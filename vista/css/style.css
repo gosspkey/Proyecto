@@ -483,3 +483,7 @@ h2{
                 margin: 0 auto;
                 padding: 0 15px;
             }
+
+            .buttonD {
+                margin: 100px !important; /* Ajusta el valor según tus necesidades */
+            }
