@@ -22,7 +22,7 @@
                         <a class="nav-link" href="admin.html">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tablaestu.php">Tabla Estudiantes</a>
+                        <a class="nav-link" href="tablaestu.php">Tabla de Usuarios</a>
                     </li>
                 </ul>
             </div>

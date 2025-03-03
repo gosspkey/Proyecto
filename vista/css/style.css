@@ -539,7 +539,7 @@ h2{
             }
 
             .buttonD {
-                display: flex;
+display: flex;
                 margin-left: 20px;
                 padding:auto;
                 margin: 5px 0; /* Reducir el espacio entre los botones */
@@ -550,7 +550,7 @@ h2{
                 display: flex;
                 justify-content: center;
                 flex-wrap: wrap;
-                margin-top: 10px; /* Añadir un margen superior para separar del título */
+margin-top: 10px; /* Añadir un margen superior para separar del título */
             }
 
             @media (max-width: 768px) {
@@ -565,4 +565,4 @@ h2{
             }
 .esovv{
     color: #4b8512;
-}
+            }
