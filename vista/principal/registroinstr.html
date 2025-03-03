@@ -64,6 +64,15 @@
                 <label for="contraseña" class="mr-2">Contraseña:</label>
                 <input type="password" class="form-control" name="contrain" id="contrain" placeholder="Ingrese su contraseña" required>
                 <span class="vercontra" onclick="vercontra('contraseña', this)">👁️‍🗨️</span>
+                <script>
+                    function vercontra(id, element) {
+                        const passwordInput = document.getElementById(id);
+                        const passwordType = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                        passwordInput.setAttribute('type', passwordType);
+                        // Cambiar el símbolo de la lectura de la contraseña
+                        element.textContent = passwordType === 'password' ? '👁️‍🗨️' : '👀';
+                    }
+                </script>
             </div>
         </div>
         <div class="text-center mt-4">
