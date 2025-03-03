@@ -45,7 +45,8 @@ if (!$usu || $usu->rowCount()==0){
 
         echo "<h1>Estudiantes</h1>";
         echo "<link rel='stylesheet' href='../css/style.css'>";
-        echo "<table class = 'custom-table'>";
+        echo "<div class='table-responsive'>";
+        echo "<table class='table table-bordered table-hover table-striped custom-table'>";
         echo "<thead>
                 <tr>
                     <th>ID</th>
@@ -62,21 +63,21 @@ if (!$usu || $usu->rowCount()==0){
 
                 </tr>
             </thead>";
-
+        echo "<tbody>";
              while($f = $usu->fetch(PDO::FETCH_ASSOC)){
 
                echo "<tr>
-                    <td>".$f["IDUsuario"]. "</td>
-                    <td>".$f["Nombre"]. "</td>
-                    <td>".$f["Apellido"]. "</td>
-                    <td>".$f["Identificacion"]. "</td>
-                    <td>".$f["Documento"]. "</td>
-                    <td>".$f["Telefono"]. "</td>
-                    <td>".$f["Email"]. "</td>
-                    <td>".$f["Ficha"]. "</td>
-                    <td>".$f["Usuario"]. "</td>
-                    <td>".$f["Rol"]. "</td>
-                    <td>".$f["Contraseña"]. "</td>
+                    <td data-label='ID'>".$f["IDUsuario"]. "</td>
+                    <td data-label='Nombre'>".$f["Nombre"]. "</td>
+                    <td data-label='Apellido'>".$f["Apellido"]. "</td>
+                    <td data-label='Tipo de identificacion'>".$f["Identificacion"]. "</td>
+                    <td data-label='Documento'>".$f["Documento"]. "</td>
+                    <td data-label='Telefono'>".$f["Telefono"]. "</td>
+                    <td data-label='Email'>".$f["Email"]. "</td>
+                    <td data-label='Ficha'>".$f["Ficha"]. "</td>
+                    <td data-label='Usuario'>".$f["Usuario"]. "</td>
+                    <td data-label='Rol'>".$f["Rol"]. "</td>
+                    <td data-label='Contraseña'>".$f["Contraseña"]. "</td>
                     <td>
 
                     <a href='actualizar.php?id=" . $f["IDUsuario"] . "' class='custom-button'>Actualizar</a>
@@ -90,7 +91,7 @@ if (!$usu || $usu->rowCount()==0){
             </tr>";
 
              }
-
+        echo "</tbody>";
             echo "</table>";
 }
         
