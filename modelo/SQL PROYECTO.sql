@@ -18,13 +18,13 @@ describe Usuario;
 
 create table Instructores(
 IDinstructor int primary key auto_increment not null,
-Nombre varchar (100) not null,
-Apellido varchar(100) not null,
-Identificacion enum('C.C','T.I','C.E','P.P.T') NOT NULL,
-Documento varchar(100) not null,
-Email varchar(100) not null,
-Usuario  varchar(100) not null,
-Contraseña  varchar(100) not null
+Nombrein varchar (100) not null,
+Apellidoin varchar(100) not null,
+Identificacionin enum('C.C','T.I','C.E','P.P.T') NOT NULL,
+Documentoin varchar(100) not null,
+Emailin varchar(100) not null,
+Usuarioin  varchar(100) not null,
+Contraseñain  varchar(100) not null
 );
 describe Instructores;
 
