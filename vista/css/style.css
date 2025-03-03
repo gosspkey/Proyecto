@@ -281,6 +281,16 @@ h2{
     overflow-y: auto;
 }
 
+.search-card a {
+    text-decoration: none;
+    color: inherit;
+}
+.search-card a:hover{
+    color: white;
+}
+.card :hover{
+    background-color:#518e14;
+}
 
 /*Tabla*/
 .col-eq {
@@ -529,5 +539,30 @@ h2{
             }
 
             .buttonD {
-                margin: 100px !important; /* Ajusta el valor según tus necesidades */
+                display: flex;
+                margin-left: 20px;
+                padding:auto;
+                margin: 5px 0; /* Reducir el espacio entre los botones */
+                text-align: center;
             }
+
+            .admin {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-top: 10px; /* Añadir un margen superior para separar del título */
+            }
+
+            @media (max-width: 768px) {
+                .admin {
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .buttonD {
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+.esovv{
+    color: #4b8512;
+}
