@@ -576,3 +576,11 @@ margin-top: 10px; /* Añadir un margen superior para separar del título */
 .text2{
     text-align: left;
 }
+
+.footer-logo {
+    width: 130px; /* Ajusta el tamaño según tus necesidades */
+}
+
+.footer-container {
+    margin-top: -60px; /* Ajusta el margen superior según tus necesidades */
+}
