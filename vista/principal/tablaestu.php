@@ -27,6 +27,7 @@
                 </ul>
             </div>
         </div>
+        <img src="../img/sena logo blamco.png" alt="Logo" width="120px">
         </nav>
 
 <?php
@@ -98,7 +99,20 @@ if (!$usu || $usu->rowCount()==0){
 ?>
 
 <footer class="mt-5 border-top">
-        <div class="container text-center py-4 col-md-2">
+    <style>
+        footer {
+            background-color: #5EA617;
+            color: white;
+        }
+        footer a {
+            color: white;
+        }
+        footer p, footer h2, footer strong {
+            color: white !important;
+        }
+    </style>
+    <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
+            <img class="footer-logo" src="../img/tecno sena logo blanco.PNG" alt="Logo">
             <h2>Tecno-Sena</h2>
             <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
         </div>
@@ -125,9 +139,7 @@ if (!$usu || $usu->rowCount()==0){
                 </p>
             </div>
         </div>
-        <div class="text-center py-3 col-md-2">
-            <img src="../img/logo naranja.png" alt="Logo">
-        </div>
+        <img src="../img/sena logo blamco.png" alt="Logo" width="300px" style="position: relative; left: -100px;" class="d-inline-block align-top">
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
