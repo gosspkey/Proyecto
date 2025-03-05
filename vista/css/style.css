@@ -572,3 +572,7 @@ margin-top: 10px; /* Añadir un margen superior para separar del título */
     text-align: end;
     align-items: end;
 }
+
+.text2{
+    text-align: left;
+}

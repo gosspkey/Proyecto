@@ -27,6 +27,7 @@
                 </ul>
             </div>
         </div>
+        <img src="../img/sena logo blamco.png" alt="Logo" width="120px">
         </nav>
 
 <?php
