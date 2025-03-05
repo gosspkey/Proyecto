@@ -81,7 +81,7 @@ if (!$usu || $usu->rowCount()==0){
                     <td data-label='Contraseña'>".$f["Contraseña"]. "</td>
                     <td>
 
-                    <a href='actualizar.php?id=" . $f["IDUsuario"] . "' class='custom-button'>Actualizar</a>
+                    <a href='actuadmin.php?id=" . $f["IDUsuario"] . "' class='custom-button'>Actualizar</a>
                     <a href='borrar.php?id=" . $f["IDUsuario"] . "' class='custom-button'>Borrar</a>
 
          
