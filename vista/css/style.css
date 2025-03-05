@@ -521,6 +521,7 @@ h2{
                
             .zoom {
                 transition: transform 0.5s ease-in-out;
+                position:sticky;
             }
     
             .zoom:hover {
