@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css"> 
-    <title>TECNO-SENA</title>
+    <link rel="stylesheet" href="../css/style.css"> 
+    <title>Registrar</title>
 </head>
+
+<body>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="img/logo-blanco.png" alt="Logo" width="300px">
+                <img src="../img/logo-blanco.png" alt="Logo" width="300px">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -19,22 +22,41 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="iniciosesion.html">Iniciar Sesión</a>
+                        <a class="nav-link" href="admin.html">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Ayuda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../Proyecto/index.html">Inicio</a>
+                        <a class="nav-link" href="tablainstu.php">Tabla Instructores</a>
                     </li>
                 </ul>
             </div>
         </div>
-        <img src="../vista/img/sena logo blamco.png" alt="Logo" width="120px">
-    </nav>
+        <img src="../img/sena logo blamco.png" alt="Logo" width="120px">
+        </nav>
+<?php
+include ('../../confi/conexion.php'); 
+$database = new Database();
+$conexion = $database->getConnection(); 
 
-    <form action="../controlador/usuariocont.php" method="POST" class="container">
-        <h2 class="titulo text-center"> <strong>Registro</strong></h2>
+if (!$_POST) {
+    ?>
+    <form method="POST" action="actuadmin.php">
+        Usuario:
+        <br>
+        <?php
+        $ssql = "SELECT usuario FROM Usuario ORDER BY usuario";
+        $result = $conexion->query($ssql);
+        
+
+        echo '<select name="usuario">';
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            echo '<option>' . $row["usuario"] . '</option>';
+        }
+        echo '</select>';
+    
+        ?>
+        </section>
+        <form action="../controlador/usuariocont.php" method="POST" class="container">
+        <h2 class="titulo text-center"> <strong>Actualizar</strong></h2>
         <div class="row">
             <div class="container mt-5 col-md-6 form1 form-group">
                 <label for="nombre" class="mr-2">Nombre(s):</label>
@@ -107,21 +129,13 @@
         </div>
     </form>
 
-    <footer class="mt-5 border-top">
+    <footer class="bg-light mt-5 border-top">
         <style>
             footer {
-                background-color: #5EA617;
-                color: white;
-            }
-            footer a {
-                color: white;
-            }
-            footer p, footer h2, footer strong {
-                color: white !important;
+                background-color: #f3dfc2;
             }
         </style>
-        <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
-            <img class="footer-logo" src="../vista/img/tecno sena logo blanco.PNG" alt="Logo">
+        <div class="container text-center py-4 col-md-2">
             <h2>Tecno-Sena</h2>
             <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
         </div>
@@ -148,12 +162,43 @@
                 </p>
             </div>
         </div>
-        <img src="../vista/img/sena logo blamco.png" alt="Logo" width="300px" style="position: relative; left: -100px;" class="d-inline-block align-top">
+        <div class="text-center py-3 col-md-2">
+            <img src="img/logo naranja.png" alt="Logo">
+        </div>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="estilos.js"></script>
+        </form>
+    <?php
+} else {
+
+    $usuario = $_POST["usuario"];
+    $nombre = $_POST["nombre"];
+    $apellido = $_POST["apellido"];
+    $email = $_POST["email"];
+
+    $ssql = "UPDATE Usuario 
+    SET nombre = :nombre, apellido = :apellido, email = :email 
+    WHERE usuario = :usuario";
+
+    $stmt = $conexion->prepare($ssql);
+    $stmt->bindParam(':nombre', $nombre);
+    $stmt->bindParam(':apellido', $apellido);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':usuario', $usuario);
+
+    if ($stmt->execute()) {
+        echo 'Usuario actualizado con éxito';
+    } else {
+        echo 'Hubo un error al actualizar el usuario';
+    }
+}
+
+$conexion = null; 
+?>
 </body>
+
 </html>
