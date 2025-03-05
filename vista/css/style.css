@@ -456,8 +456,8 @@ h2{
 
 .tituo{
     font-size: 6.66666667vw;
-    font:  sans-serif;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+   
     text-align: center;
 }
 
@@ -566,3 +566,9 @@ margin-top: 10px; /* Añadir un margen superior para separar del título */
 .esovv{
     color: #4b8512;
             }
+
+
+.align {
+    text-align: end;
+    align-items: end;
+}
