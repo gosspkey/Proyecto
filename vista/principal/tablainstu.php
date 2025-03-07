@@ -76,7 +76,7 @@ if (!$ins || $ins->rowCount()==0){
                     <td>
 
                     <a href='actualizar.php?id=" . $f["IDinstructor"] . "' class='custom-button'>Actualizar</a>
-                    <a href='borrar.php?id=" . $f["IDinstructor"] . "' class='custom-button'>Borrar</a>
+                    <a href='borrarinstu.php?id=" . $f["IDinstructor"] . "' class='custom-button'>Borrar</a>
 
          
 

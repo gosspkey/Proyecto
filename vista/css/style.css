@@ -262,6 +262,7 @@ h2{
     margin: auto;
 }
 
+
 /*Buscador de contenido*/
 .search-container {
     max-width: 800px;
@@ -540,7 +541,7 @@ h2{
             }
 
             .buttonD {
-display: flex;
+                display: flex;
                 margin-left: 20px;
                 padding:auto;
                 margin: 5px 0; /* Reducir el espacio entre los botones */
@@ -584,4 +585,47 @@ margin-top: 10px; /* Añadir un margen superior para separar del título */
 
 .footer-container {
     margin-top: -60px; /* Ajusta el margen superior según tus necesidades */
+}
+
+h3{
+    color: #4b8413;
+    padding: 10px;
+    margin: 10px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+h3:hover{
+    color: #4b8413;
+    background-color: #d4eebb;
+    border-radius: 20px;
+}
+.col-eq h4{
+    color: #437214;
+    padding: 10px;
+    margin: 10px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.col-eq p{
+    color: #385816;
+    padding: 10px;
+    margin: 50px 50px 0px 50px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.col-tab :hover{
+    transition: transform 0.5s ease-in-out;
+    position:sticky;
+}
+.col-tab :hover{
+    transform: scale(1.1);
+}
+.col-tab{
+    box-shadow: #659e28 5px 5px 5px;
+    border-radius: 20px;
+    border:  #c6ebb7;
+    background-color: white;
 }
