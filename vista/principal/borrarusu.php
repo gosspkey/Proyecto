@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css"> 
-    <title>TECNO-SENA</title>
+    <title>Eliminar Usuario</title>
 </head>
+
 <body>
 <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../img/logo-blanco.png" alt="Logo" width="300px" style="position: relative; left: -20px;"class="d-inline-block align-top">
+                <img src="../img/logo-blanco.png" alt="Logo" width="300px" style="position: relative; left: -20px;" class="d-inline-block align-top">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -30,75 +32,45 @@
         </div>
         <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
-
 <?php
-require_once('../../modelo/usuario.php');
-require_once('../../confi/conexion.php');
+include ('../../confi/conexion.php'); 
 $database = new Database();
-$db = $database->getConnection();
-$usuario= new Usuario($db);
-$usu = $usuario->listarusu();
-
-if (!$usu || $usu->rowCount()==0){
-    echo "No hay usuarios registrados";
-}else
-{
+$conexion = $database->getConnection(); 
 
 
-        echo "<h1>Estudiantes</h1>";
-        echo "<link rel='stylesheet' href='../css/style.css'>";
-        echo "<div class='table-responsive'>";
-        echo "<table class='table table-bordered table-hover table-striped custom-table'>";
-        echo "<thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Tipo de identificacion</th>
-                    <th>Documento</th>
-                    <th>Telefono</th>
-                    <th>Email</th>
-                    <th>Ficha</th>
-                    <th>Usuario</th>
-                    <th>Rol</th>
-                    <th>Contraseña</th>
-
-                </tr>
-            </thead>";
-        echo "<tbody>";
-             while($f = $usu->fetch(PDO::FETCH_ASSOC)){
-
-               echo "<tr>
-                    <td data-label='ID'>".$f["IDUsuario"]. "</td>
-                    <td data-label='Nombre'>".$f["Nombre"]. "</td>
-                    <td data-label='Apellido'>".$f["Apellido"]. "</td>
-                    <td data-label='Tipo de identificacion'>".$f["Identificacion"]. "</td>
-                    <td data-label='Documento'>".$f["Documento"]. "</td>
-                    <td data-label='Telefono'>".$f["Telefono"]. "</td>
-                    <td data-label='Email'>".$f["Email"]. "</td>
-                    <td data-label='Ficha'>".$f["Ficha"]. "</td>
-                    <td data-label='Usuario'>".$f["Usuario"]. "</td>
-                    <td data-label='Rol'>".$f["Rol"]. "</td>
-                    <td data-label='Contraseña'>".$f["Contraseña"]. "</td>
-                    <td>
-
-                    <a href='actuadmin.php?id=" . $f["IDUsuario"] . "' class='custom-button'>Actualizar</a>
-                    <a href='borrarusu.php?id=" . $f["IDUsuario"] . "' class='custom-button'>Borrar</a>
-
-         
-
-                    </td>
+$id_a_borrar = $_GET['id'];
 
 
-            </tr>";
-
-             }
-        echo "</tbody>";
-            echo "</table>";
-}
+if (filter_var($id_a_borrar, FILTER_VALIDATE_INT)) {
+    try {
         
-?>
+        $query = "DELETE FROM Usuario WHERE IDUsuario = :id";
+        
 
+        $stmt = $conexion->prepare($query);
+        
+        
+        $stmt->bindParam(':id', $id_a_borrar);
+
+        
+        if ($stmt->execute()) {
+     
+            if ($stmt->rowCount() > 0) {
+                echo "<p>Usuario borrado correctamente</p>";
+            } else {
+                echo "<p>No se encontró el usuario</p>";
+            }
+        } else {
+            echo "<p>Error al borrar el usuario</p>";
+        }
+    } catch (PDOException $e) {
+        
+        echo "<p>Error al ejecutar la consulta: " . $e->getMessage() . "</p>";
+    }
+} else {
+    echo "<p>ID no válido.</p>";
+}
+?>
 <footer class="mt-5 border-top">
     <style>
         footer {
@@ -127,7 +99,7 @@ if (!$usu || $usu->rowCount()==0){
             </div>
             <div class="iconos tel col-md-2">
                 <p> 
-                    <strong>Telefono:</strong> 
+                    <strong>Teléfono:</strong> 
                     <br> 
                     +573222175535
                 </p>
@@ -148,4 +120,3 @@ if (!$usu || $usu->rowCount()==0){
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
