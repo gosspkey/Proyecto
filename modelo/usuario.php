@@ -18,6 +18,71 @@ class Usuario {
     public function __construct($db) {
         $this->conn = $db;
     }
+    // Función para actualizar un usuario
+    public function actualizar() {
+        $query = "UPDATE " . $this->table . " SET 
+            Nombre = :nombre,
+            Apellido = :apellido,
+            Identificacion = :identi,
+            Documento = :documento,
+            Telefono = :telefono,
+            Email = :email,
+            Ficha = :ficha,
+            Usuario = :usuario,
+            Rol = :rol,
+            Contraseña = :contra
+            WHERE IDUsuario = :id";
+
+        $stmt = $this->conn->prepare($query);
+
+        // Encriptar los datos
+        $this->nombre = htmlspecialchars(strip_tags($this->nombre));
+        $this->apellido = htmlspecialchars(strip_tags($this->apellido));
+        $this->identi = htmlspecialchars(strip_tags($this->identi));
+        $this->documento = htmlspecialchars(strip_tags($this->documento));
+        $this->telefono = htmlspecialchars(strip_tags($this->telefono));
+        $this->email = htmlspecialchars(strip_tags($this->email));
+        $this->ficha = htmlspecialchars(strip_tags($this->ficha));
+        $this->usuario = htmlspecialchars(strip_tags($this->usuario));
+        $this->rol = htmlspecialchars(strip_tags($this->rol));
+        $this->contra = password_hash($this->contra, PASSWORD_BCRYPT);
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        // Vincular parámetros
+        $stmt->bindParam(':nombre', $this->nombre);
+        $stmt->bindParam(':apellido', $this->apellido);
+        $stmt->bindParam(':identi', $this->identi);
+        $stmt->bindParam(':documento', $this->documento);
+        $stmt->bindParam(':telefono', $this->telefono);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':ficha', $this->ficha);
+        $stmt->bindParam(':usuario', $this->usuario);
+        $stmt->bindParam(':rol', $this->rol);
+        $stmt->bindParam(':contra', $this->contra);
+        $stmt->bindParam(':id', $this->id);
+
+        // Ejecutar la consulta
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            // Manejo de errores
+            $errorInfo = $stmt->errorInfo();
+            echo "Error al ejecutar la consulta: " . $errorInfo[2];
+            return false;
+        }
+    }
+
+    // Función para obtener un solo usuario por ID
+    public function Usuuno() {
+        $query = "SELECT * FROM " . $this->table . " WHERE IDUsuario = :id LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+
+        // Vincular el parámetro id
+        $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+
+        $stmt->execute();
+        return $stmt;
+    }
 
     // Crear la función que permite ingresar usuario
     public function crearusu() {

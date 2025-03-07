@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css"> 
-    <title>Registrar</title>
+    <link rel="stylesheet" href="css/style.css"> 
+    <title>TECNO-SENA</title>
 </head>
-
 <body>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../img/logo-blanco.png" alt="Logo" width="300px" style="position: relative; left: -20px;" class="d-inline-block align-top">
+                <img src="../vista/img/logo-blanco.png" alt="Logo" width="300px" style="position: relative; left: -20px;" class="d-inline-block align-top">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -22,83 +19,96 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a style="position: relative; left: 170px;" class="nav-link" href="../Proyecto/vista/registro.html">Registrarse</a>
+                        <a style="position: relative; left: 170px;" class="nav-link" href="../vista/iniciosesion.html">Inicio sesion</a>
                     </li>
                     <li class="nav-item">
                         <a style="position: relative; left: 170px; " class="nav-link" href="#">Ayuda</a>
                     </li>
                 </ul>
             </div>
-           
         </div>
-        <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
+        <img src="../vista/img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
-<?php
-include ('../../confi/conexion.php'); 
-$database = new Database();
-$conexion = $database->getConnection(); 
 
-if (!$_POST) {
-    ?>
-    <form method="POST" action="actuadmin.php">
-        Usuario:
-        <br>
-        <?php
-        $ssql = "SELECT usuario FROM Usuario ORDER BY usuario";
-        $result = $conexion->query($ssql);
-        
+    <?php
+    require_once('../../modelo/usuario.php');
+    require_once('../../confi/conexion.php');
+    $database = new Database();
+    $db = $database->getConnection();
+    $usuario = new Usuario($db);
 
-        echo '<select name="usuario">';
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            echo '<option>' . $row["usuario"] . '</option>';
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+        $usuario->id = $id;
+        $data = $usuario->Usuuno();
+        $fila = $data->fetch(PDO::FETCH_ASSOC);
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $usuario->id = $_POST['IDUsuario'];
+        $usuario->nombre = $_POST['nombre'];
+        $usuario->apellido = $_POST['apellido'];
+        $usuario->identi = $_POST['identi'];
+        $usuario->documento = $_POST['documento'];
+        $usuario->telefono = $_POST['telefono'];
+        $usuario->email = $_POST['correo'];
+        $usuario->ficha = $_POST['ficha'];
+        $usuario->usuario = $_POST['usuario'];
+        $usuario->rol = $_POST['rol'];
+        $usuario->contra = $_POST['contraseña'];
+
+        if ($usuario->actualizar()) {
+            echo "Usuario actualizado correctamente.";
+        } else {
+            echo "Error al actualizar el usuario.";
         }
-        echo '</select>';
-    
-        ?>
-        </section>
-        <form action="../controlador/usuariocont.php" method="POST" class="container">
-        <h2 class="titulo text-center"> <strong>Actualizar</strong></h2>
+    }
+    ?>
+
+    <form action="actuadmin.php?id=<?php echo $usuario->id; ?>" method="POST" class="container">
+        <input type="hidden" name="IDUsuario" value="<?php echo $fila['IDUsuario']; ?>">
+        <h2 class="titulo text-center"> <strong>Registro</strong></h2>
         <div class="row">
             <div class="container mt-5 col-md-6 form1 form-group">
                 <label for="nombre" class="mr-2">Nombre(s):</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" value="<?php echo $fila['Nombre']; ?>" required>
 
                 <label for="apellido" class="mr-2">Apellidos:</label>
-                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingrese sus apellidos" required>
+                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingrese sus apellidos" value="<?php echo $fila['Apellido']; ?>" required>
 
                 <label for="identi" class="mr-2">Tipo de documento:</label>
                 <select name="identi" id="identi" class="form-control">
-                    <option value="C.C">C.C</option>
-                    <option value="T.I">T.I</option>
-                    <option value="C.E">C.E</option>
-                    <option value="P.P.T">P.P.T</option>
+                    <option value="C.C" <?php if ($fila['Identificacion'] == "C.C") echo 'selected'; ?>>C.C</option>
+                    <option value="T.I" <?php if ($fila['Identificacion'] == "T.I") echo 'selected'; ?>>T.I</option>
+                    <option value="C.E" <?php if ($fila['Identificacion'] == "C.E") echo 'selected'; ?>>C.E</option>
+                    <option value="P.P.T" <?php if ($fila['Identificacion'] == "P.P.T") echo 'selected'; ?>>P.P.T</option>
                 </select>
 
                 <label for="documento" class="mr-2">Numero de documento:</label>
-                <input type="text" class="form-control" name="documento" id="documento" placeholder="Ingrese su numero del documento" required>
+                <input type="text" class="form-control" name="documento" id="documento" placeholder="Ingrese su numero del documento" value="<?php echo $fila['Documento']; ?>" required>
 
                 <label for="telefono" class="mr-2">Telefono:</label>
-                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Ingrese numero de contacto" required>
+                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Ingrese numero de contacto" value="<?php echo $fila['Telefono']; ?>" required>
                 
                 <label for="correo" class="mr-2">Correo electronico:</label>
-                <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese correo" required>
+                <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese correo" value="<?php echo $fila['Email']; ?>" required>
             </div>
 
             <div class="container mt-5 col-md-6 form1 form-group">
                 <label for="ficha" class="mr-2">Ficha:</label>
-                <input type="text" class="form-control" name="ficha" id="ficha" placeholder="Ingrese un usuario" required>
+                <input type="text" class="form-control" name="ficha" id="ficha" placeholder="Ingrese una ficha" value="<?php echo $fila['Ficha']; ?>" required>
 
                 <label for="usuario" class="mr-2">Nombre de usuario:</label>
-                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingrese un usuario" required>
+                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingrese un usuario" value="<?php echo $fila['Usuario']; ?>" required>
 
                 <label for="rol" class="mr-2">Rol:</label>
                 <select name="rol" id="rol" class="form-control">
-                    <option value="Administrador">Administrador</option>
-                    <option value="Estudiante">Estudiante</option>
+                    <option value="Administrador" <?php if ($fila['Rol'] == "Administrador") echo 'selected'; ?>>Administrador</option>
+                    <option value="Estudiante" <?php if ($fila['Rol'] == "Estudiante") echo 'selected'; ?>>Estudiante</option>
                 </select>
 
                 <label for="contraseña" class="mr-2">Contraseña:</label>
-                <input type="password" class="form-control" name="contraseña" id="contraseña" placeholder="Ingrese su contraseña" required>
+                <input type="password" class="form-control" name="contraseña" id="contraseña" placeholder="Ingrese su contraseña" value="<?php echo $fila['Contraseña']; ?>" required>
                 <span class="vercontra" onclick="vercontra('contraseña', this)">👁️‍🗨️</span>
                 <script>
                     function vercontra(id, element) {
@@ -112,7 +122,7 @@ if (!$_POST) {
             </div>
         </div>
         <div class="text-center mt-4">
-            <button class="btn btn-success custom-button" type="submit">Registrarse</button>
+            <button class="btn btn-success custom-button" type="submit">Guardar cambios</button>
         </div>
         <br><br>
         <div class="container">
@@ -130,13 +140,21 @@ if (!$_POST) {
         </div>
     </form>
 
-    <footer class="bg-light mt-5 border-top">
+    <footer class="mt-5 border-top">
         <style>
             footer {
-                background-color: #f3dfc2;
+                background-color: #5EA617;
+                color: white;
+            }
+            footer a {
+                color: white;
+            }
+            footer p, footer h2, footer strong {
+                color: white !important;
             }
         </style>
-        <div class="container text-center py-4 col-md-2">
+        <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
+            <img class="footer-logo" src="../vista/img/tecno sena logo blanco.PNG" alt="Logo">
             <h2>Tecno-Sena</h2>
             <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
         </div>
@@ -163,43 +181,50 @@ if (!$_POST) {
                 </p>
             </div>
         </div>
-        <div class="text-center py-3 col-md-2">
-            <img src="img/logo naranja.png" alt="Logo">
-        </div>
+        <img src="../vista/img/sena logo blamco.png" alt="Logo" width="300px" style="position: relative; left: -100px;" class="d-inline-block align-top">
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="estilos.js"></script>
-        </form>
-    <?php
-} else {
+</body>
+</html>
 
-    $usuario = $_POST["usuario"];
-    $nombre = $_POST["nombre"];
-    $apellido = $_POST["apellido"];
-    $email = $_POST["email"];
+<?php
+require_once('../../modelo/usuario.php');
+require_once('../../confi/conexion.php');
 
-    $ssql = "UPDATE Usuario 
-    SET nombre = :nombre, apellido = :apellido, email = :email 
-    WHERE usuario = :usuario";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $database = new Database();
+    $db = $database->getConnection();
+    $usuario = new Usuario($db);
 
-    $stmt = $conexion->prepare($ssql);
-    $stmt->bindParam(':nombre', $nombre);
-    $stmt->bindParam(':apellido', $apellido);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':usuario', $usuario);
-
-    if ($stmt->execute()) {
-        echo 'Usuario actualizado con éxito';
+    $usuario->id = $_POST['IDUsuario'];
+    $usuario->nombre = $_POST['nombre'];
+    $usuario->apellido = $_POST['apellido'];
+    $usuario->identi = $_POST['identi'];
+    $usuario->documento = $_POST['documento'];
+    $usuario->telefono = $_POST['telefono'];
+    $usuario->email = $_POST['correo'];
+    $usuario->ficha = $_POST['ficha'];
+    $usuario->usuario = $_POST['usuario'];
+    $usuario->rol = $_POST['rol'];
+    
+    // Solo encriptamos la contraseña si ha sido cambiada
+    if (!empty($_POST['contraseña'])) {
+        $usuario->contra = password_hash($_POST['contraseña'], PASSWORD_BCRYPT);
     } else {
-        echo 'Hubo un error al actualizar el usuario';
+        // Mantenemos la contraseña existente si no se ha cambiado
+        $data = $usuario->Usuuno();
+        $fila = $data->fetch(PDO::FETCH_ASSOC);
+        $usuario->contra = $fila['Contraseña'];
+    }
+
+    if ($usuario->actualizar()) {
+        echo "Usuario actualizado correctamente.";
+    } else {
+        echo "Error al actualizar el usuario.";
     }
 }
-
-$conexion = null; 
 ?>
-</body>
-
-</html>
