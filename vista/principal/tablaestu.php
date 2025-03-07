@@ -83,7 +83,7 @@ if (!$usu || $usu->rowCount()==0){
                     <td>
 
                     <a href='actuadmin.php?id=" . $f["IDUsuario"] . "' class='custom-button'>Actualizar</a>
-                    <a href='borrar.php?id=" . $f["IDUsuario"] . "' class='custom-button'>Borrar</a>
+                    <a href='borrarusu.php?id=" . $f["IDUsuario"] . "' class='custom-button'>Borrar</a>
 
          
 

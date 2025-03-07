@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css"> 
-    <title>TECNO-SENA</title>
+    <title>Eliminar Usuario</title>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="../img/logo-blanco.png" alt="Logo" width="300px" style="position: relative; left: -20px;" class="d-inline-block align-top">
@@ -30,49 +32,59 @@
         </div>
         <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
-    <form action="../controlador/usuariocont.php" method="POST" class="container">
-        <h2 class="titulo text-center"> <strong>Rerserva de tablet</strong></h2> 
-        <div class="row">
-            <div class="col-md-6">
-                <img src="../img/tablet651.png" class="img-fluid" alt="" width="300px">
-            </div>
-            <div class="container mt-5 col-md-6 form1 form-group">
-                <label for="usuario" class="mr-2">Nombre completo:</label>
-                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingrese su nombre completo" required>
+<?php
+include ('../../confi/conexion.php'); 
+$database = new Database();
+$conexion = $database->getConnection(); 
 
-                <label for="contraseña" class="mr-2">Ficha:</label>
-                <input type="text" class="form-control" name="contraseña" id="contraseña" placeholder="Ingrese el numero de ficha" required>
-            </div>    
-        </div>
-        <div class="d-flex justify-content-center button-center">
-            <div class="button">
-                <a href=""></a>
-                <button class="btn custom-button" type="submit" onclick="return showAlert()">Reservar</button>
-                
-            </div>
-            <div class="button">
-                <a href="../principal/equipos.html">
-                <button class="btn custom-button" type="button">Cancelar</button>
-                </a>
-            </div>
-        </div>
-        <br>
-    </form>
 
-    <footer class="mt-5 border-top">
-        <style>
-            footer {
-                background-color: #5EA617;
-                color: white;
+$id_a_borrar = $_GET['id'];
+
+
+if (filter_var($id_a_borrar, FILTER_VALIDATE_INT)) {
+    try {
+        
+        $query = "DELETE FROM Usuario WHERE IDUsuario = :id";
+        
+
+        $stmt = $conexion->prepare($query);
+        
+        
+        $stmt->bindParam(':id', $id_a_borrar);
+
+        
+        if ($stmt->execute()) {
+     
+            if ($stmt->rowCount() > 0) {
+                echo "<p>Usuario borrado correctamente</p>";
+            } else {
+                echo "<p>No se encontró el usuario</p>";
             }
-            footer a {
-                color: white;
-            }
-            footer p, footer h2, footer strong {
-                color: white !important;
-            }
-        </style>
-        <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
+        } else {
+            echo "<p>Error al borrar el usuario</p>";
+        }
+    } catch (PDOException $e) {
+        
+        echo "<p>Error al ejecutar la consulta: " . $e->getMessage() . "</p>";
+    }
+} else {
+    echo "<p>ID no válido.</p>";
+}
+?>
+<footer class="mt-5 border-top">
+    <style>
+        footer {
+            background-color: #5EA617;
+            color: white;
+        }
+        footer a {
+            color: white;
+        }
+        footer p, footer h2, footer strong {
+            color: white !important;
+        }
+    </style>
+    <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
             <img class="footer-logo" src="../img/tecno sena logo blanco.PNG" alt="Logo">
             <h2>Tecno-Sena</h2>
             <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
@@ -87,7 +99,7 @@
             </div>
             <div class="iconos tel col-md-2">
                 <p> 
-                    <strong>Telefono:</strong> 
+                    <strong>Teléfono:</strong> 
                     <br> 
                     +573222175535
                 </p>
@@ -106,11 +118,5 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-    function showAlert() {
-        alert("Reserva realizada con éxito. Recuerde reclamarlo en menos de 10 minutos y llevar el carnet");
-        return true;
-    }
-    </script>
 </body>
 </html>
