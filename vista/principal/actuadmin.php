@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="stylesheet" href="../css/style.css"> 
     <title>TECNO-SENA</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../vista/img/logo-blanco.png" alt="Logo" width="300px" style="position: relative; left: -20px;" class="d-inline-block align-top">
+                <img src="../img/logo-blanco.png" alt="Logo" width="300px" style="position: relative; left: -20px;" class="d-inline-block align-top">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -27,7 +27,7 @@
                 </ul>
             </div>
         </div>
-        <img src="../vista/img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
+        <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
 
     <?php
@@ -67,48 +67,48 @@
 
     <form action="actuadmin.php?id=<?php echo $usuario->id; ?>" method="POST" class="container">
         <input type="hidden" name="IDUsuario" value="<?php echo $fila['IDUsuario']; ?>">
-        <h2 class="titulo text-center"> <strong>Registro</strong></h2>
+        <h2 class="titulo text-center"> <strong>Actualizar Usuario</strong></h2>
         <div class="row">
             <div class="container mt-5 col-md-6 form1 form-group">
                 <label for="nombre" class="mr-2">Nombre(s):</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" value="<?php echo $fila['Nombre']; ?>" required>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
 
                 <label for="apellido" class="mr-2">Apellidos:</label>
-                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingrese sus apellidos" value="<?php echo $fila['Apellido']; ?>" required>
+                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingrese sus apellidos" required>
 
                 <label for="identi" class="mr-2">Tipo de documento:</label>
                 <select name="identi" id="identi" class="form-control">
-                    <option value="C.C" <?php if ($fila['Identificacion'] == "C.C") echo 'selected'; ?>>C.C</option>
-                    <option value="T.I" <?php if ($fila['Identificacion'] == "T.I") echo 'selected'; ?>>T.I</option>
-                    <option value="C.E" <?php if ($fila['Identificacion'] == "C.E") echo 'selected'; ?>>C.E</option>
-                    <option value="P.P.T" <?php if ($fila['Identificacion'] == "P.P.T") echo 'selected'; ?>>P.P.T</option>
+                    <option value="C.C">C.C</option>
+                    <option value="T.I">T.I</option>
+                    <option value="C.E">C.E</option>
+                    <option value="P.P.T">P.P.T</option>
                 </select>
 
                 <label for="documento" class="mr-2">Numero de documento:</label>
-                <input type="text" class="form-control" name="documento" id="documento" placeholder="Ingrese su numero del documento" value="<?php echo $fila['Documento']; ?>" required>
+                <input type="text" class="form-control" name="documento" id="documento" placeholder="Ingrese su numero del documento" required>
 
                 <label for="telefono" class="mr-2">Telefono:</label>
-                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Ingrese numero de contacto" value="<?php echo $fila['Telefono']; ?>" required>
+                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Ingrese numero de contacto" required>
                 
                 <label for="correo" class="mr-2">Correo electronico:</label>
-                <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese correo" value="<?php echo $fila['Email']; ?>" required>
+                <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese correo" required>
             </div>
 
             <div class="container mt-5 col-md-6 form1 form-group">
                 <label for="ficha" class="mr-2">Ficha:</label>
-                <input type="text" class="form-control" name="ficha" id="ficha" placeholder="Ingrese una ficha" value="<?php echo $fila['Ficha']; ?>" required>
+                <input type="text" class="form-control" name="ficha" id="ficha" placeholder="Ingrese una ficha" required>
 
                 <label for="usuario" class="mr-2">Nombre de usuario:</label>
-                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingrese un usuario" value="<?php echo $fila['Usuario']; ?>" required>
+                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingrese un usuario" required>
 
                 <label for="rol" class="mr-2">Rol:</label>
                 <select name="rol" id="rol" class="form-control">
-                    <option value="Administrador" <?php if ($fila['Rol'] == "Administrador") echo 'selected'; ?>>Administrador</option>
-                    <option value="Estudiante" <?php if ($fila['Rol'] == "Estudiante") echo 'selected'; ?>>Estudiante</option>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Estudiante">Estudiante</option>
                 </select>
 
                 <label for="contraseña" class="mr-2">Contraseña:</label>
-                <input type="password" class="form-control" name="contraseña" id="contraseña" placeholder="Ingrese su contraseña" value="<?php echo $fila['Contraseña']; ?>" required>
+                <input type="password" class="form-control" name="contraseña" id="contraseña" placeholder="Ingrese su contraseña" required>
                 <span class="vercontra" onclick="vercontra('contraseña', this)">👁️‍🗨️</span>
                 <script>
                     function vercontra(id, element) {
@@ -153,8 +153,8 @@
                 color: white !important;
             }
         </style>
-        <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
-            <img class="footer-logo" src="../vista/img/tecno sena logo blanco.PNG" alt="Logo">
+       <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
+            <img class="footer-logo" src="../img/tecno sena logo blanco.PNG" alt="Logo">
             <h2>Tecno-Sena</h2>
             <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
         </div>
@@ -168,7 +168,7 @@
             </div>
             <div class="iconos tel col-md-2">
                 <p> 
-                    <strong>Telefono:</strong> 
+                    <strong>Teléfono:</strong> 
                     <br> 
                     +573222175535
                 </p>
@@ -181,15 +181,15 @@
                 </p>
             </div>
         </div>
-        <img src="../vista/img/sena logo blamco.png" alt="Logo" width="300px" style="position: relative; left: -100px;" class="d-inline-block align-top">
+        <img src="../img/sena logo blamco.png" alt="Logo" width="300px" style="position: relative; left: -100px;" class="d-inline-block align-top">
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="estilos.js"></script>
 </body>
 </html>
+
 
 <?php
 require_once('../../modelo/usuario.php');
