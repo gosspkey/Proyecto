@@ -27,8 +27,6 @@
         </div>
         <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
-    <h2>Tu perfil</h2>
-
 
     <?php
 session_start(); // Reanuda la sesión
@@ -56,15 +54,33 @@ if (isset($_SESSION['id'])) {
 
     if ($stmt !== false && $stmt->rowCount() > 0) { // Verificar resultados
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        echo "Bienvenid@, " . htmlspecialchars($data['Nombre']) . " " . htmlspecialchars($data['Apellido']) . "<br>";
-        echo "Aquí tu información:" . "<br>";
-        echo "Identificación: " . htmlspecialchars($data['Identificacion']) . " " . htmlspecialchars($data['Documento']) . "<br>";
-        echo "Teléfono: " . htmlspecialchars($data['Telefono']) . "<br>";
-        echo "Correo: " . htmlspecialchars($data['Email']) . "<br>";
-        echo "Ficha: " . htmlspecialchars($data['Ficha']) . "<br>";
-        echo "Usuario: " . htmlspecialchars($data['Usuario']) . "<br>";
-        echo "Rol: " . htmlspecialchars($data['Rol']) . "<br>";
-
+     ?>
+     <div class="container text-center mt-5 d-flex align-items-center justify-content-center">   
+        <img src="../img/perfil.png" alt="Perfil" class="img-perfil img-fluid">
+        <h1 class="titulo-perfil"> Hola <?php echo htmlspecialchars($data['Nombre']) . " " . htmlspecialchars($data['Apellido']); ?>!</h1>
+    </div>
+    <div class="container text-center mt-3">
+        <button class="btn btn-perfil" type="button" data-toggle="collapse" data-target="#infoUsuario" aria-expanded="false" aria-controls="infoUsuario">
+            Aquí tu información
+        </button>
+        <div class="collapse mt-3 info-perfil" id="infoUsuario">
+ 
+        <div class="colperfil text-center justify-content-center">
+            <h2>Información del usuario</h2>
+        <div class="col-eq justify-content-center">
+           <?php
+                echo "<p>Identificación: " . htmlspecialchars($data['Identificacion']) . " " . htmlspecialchars($data['Documento']) . "</p>";
+                echo "<p>Teléfono: " . htmlspecialchars($data['Telefono']) . "</p>";
+                echo "<p>Correo: " . htmlspecialchars($data['Email']) . "</p>";
+                echo "<p>Ficha: " . htmlspecialchars($data['Ficha']) . "</p>";
+                echo "<p>Usuario: " . htmlspecialchars($data['Usuario']) . "</p>";
+                echo "<p>Rol: " . htmlspecialchars($data['Rol']) . "</p>";
+            ?>
+        </div>
+        </div>
+        </div>
+    </div>
+<?php
         // Enlace para actualizar datos
         echo "<a href='ajustes.php?id=" . htmlspecialchars($_SESSION['id']) . "' class='btn btn-success custom-button'>Hazlo aquí</a>";
     } else {

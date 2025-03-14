@@ -629,3 +629,45 @@ h3:hover{
     border:  #c6ebb7;
     background-color: white;
 }
+.titulo-perfil{
+    font-size: 40px;
+    color:  #4b8413;
+}
+.img-perfil{
+    width: 150px; 
+    height: 150px; 
+    margin-right: 20px;
+}
+.btn-perfil{
+    background-color: #5EA617;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+}
+.btn-perfil:hover{
+    background-color: #4b8413;
+    color: white;
+}
+.info-perfil p{
+    font-size: 18px;
+}
+.form-perfil{
+    padding: 20px  10px 20px 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.colperfil{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0px 12px rgba(0,0,0,0.175);
+    text-align: center;
+}
+.colperfil p{
+    text-align: center;
+}
