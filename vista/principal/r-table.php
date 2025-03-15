@@ -1,3 +1,18 @@
+<?php
+require_once('../../confi/conexion.php');
+
+// Conexión a la base de datos
+$database = new Database();
+$db = $database->getConnection();
+
+// Consultar las tabletas disponibles
+$query = "SELECT CodEquipo, Tableta FROM Tabletas";
+$stmt = $db->prepare($query);
+$stmt->execute();
+
+$tabletas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,44 +34,42 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a style="position: relative; left: 170px; " class="nav-link" href="#">Ayuda</a>
+                        <a style="position: relative; left: 170px;" class="nav-link" href="#">Ayuda</a>
                     </li>
                 </ul>
             </div>
-           
         </div>
         <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
-    <form action="../controlador/usuariocont.php" method="POST" class="container">
-        <h2 class="titulo text-center"> <strong>Rerserva de tablet</strong></h2> 
+
+    <form action="../controlador/reservascont.php" method="POST" class="container">
+        <h2 class="titulo text-center"><strong>Reserva de Tablet</strong></h2>
         <div class="row">
             <div class="col-md-6">
-                <img src="../img/tablet651.png" class="img-fluid" alt="" width="300px">
+                <img src="../img/tablet651.png" class="img-fluid" alt="Tablet Image" width="300px">
             </div>
             <div class="container mt-5 col-md-6 form1 form-group">
-                <label for="usuario" class="mr-2">Nombre completo:</label>
-                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingrese su nombre completo" required>
+                <label for="ficha" class="mr-2">Número de Ficha:</label>
+                <input type="text" class="form-control" name="ficha" id="ficha" placeholder="Ingrese el número de ficha" required>
 
-                <label for="contraseña" class="mr-2">Ficha:</label>
-                <input type="text" class="form-control" name="contraseña" id="contraseña" placeholder="Ingrese el numero de ficha" required>
-                <label for="t-camara" class="mr-2">¿Que tablets deseas reservar?</label>
-                <select name="t-camara" id="t-camara" class="form-control" required>
+                <label for="CodEquipo" class="mr-2">¿Qué tablet deseas reservar?</label>
+                <select name="CodEquipo" id="CodEquipo" class="form-control" required>
                     <option value="">Seleccione una opción</option>
-                    <option value="op1">PEN TABLET PTH-65</option>
-                    <option value="op1">PEN TABLET PTH-850</option>
-                    <option value="op2">Wacom One</option>
+                    <?php foreach ($tabletas as $tableta): ?>
+                        <option value="<?php echo $tableta['CodEquipo']; ?>">
+                            <?php echo $tableta['Tableta']; ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>    
         </div>
         <div class="d-flex justify-content-center button-center">
             <div class="button">
-                <a href=""></a>
                 <button class="btn custom-button" type="submit" onclick="return showAlert()">Reservar</button>
-                
             </div>
             <div class="button">
                 <a href="../principal/equipos.html">
-                <button class="btn custom-button" type="button">Cancelar</button>
+                    <button class="btn custom-button" type="button">Cancelar</button>
                 </a>
             </div>
         </div>
@@ -64,18 +77,6 @@
     </form>
 
     <footer class="mt-5 border-top">
-        <style>
-            footer {
-                background-color: #5EA617;
-                color: white;
-            }
-            footer a {
-                color: white;
-            }
-            footer p, footer h2, footer strong {
-                color: white !important;
-            }
-        </style>
         <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
             <img class="footer-logo" src="../img/tecno sena logo blanco.PNG" alt="Logo">
             <h2>Tecno-Sena</h2>
@@ -83,38 +84,23 @@
         </div>
         <div class="container d-flex justify-content-around py-3">
             <div class="iconos dire col-md-2">
-                <p>
-                    <strong>Dirección:</strong>  
-                    <br> 
-                    #31-42 Calle 15, Bogotá
-                </p>
+                <p><strong>Dirección:</strong> #31-42 Calle 15, Bogotá</p>
             </div>
             <div class="iconos tel col-md-2">
-                <p> 
-                    <strong>Telefono:</strong> 
-                    <br> 
-                    +573222175535
-                </p>
+                <p><strong>Teléfono:</strong> +573222175535</p>
             </div>
             <div class="iconos ema col-md-2">
-                <p>
-                    <strong>Correo:</strong>
-                    <br>
-                    equipoceni@soy.sena.edu.co
-                </p>
+                <p><strong>Correo:</strong> equipoceni@soy.sena.edu.co</p>
             </div>
         </div>
         <img src="../img/sena logo blamco.png" alt="Logo" width="300px" style="position: relative; left: -100px;" class="d-inline-block align-top">
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-    function showAlert() {
-        alert("Reserva realizada con éxito. Recuerde reclamarlo en menos de 10 minutos y llevar el carnet");
-        return true;
-    }
+        function showAlert() {
+            alert("Reserva realizada con éxito. Recuerde reclamarlo en menos de 10 minutos y llevar el carnet.");
+            return true;
+        }
     </script>
 </body>
 </html>
