@@ -66,19 +66,19 @@
         <div class="row">
             <div class="container mt-5 col-md-6 form1 form-group">
                 <label for="nombre" class="mr-2">Nombre(s):</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" value="<?php echo htmlspecialchars($fila['Nombre'] ?? ''); ?>" required>
 
                 <label for="apellido" class="mr-2">Apellidos:</label>
-                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingrese sus apellidos" required>
+                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingrese sus apellidos" value="<?php echo htmlspecialchars($fila['Apellido'] ?? ''); ?>" required>
 
                 <label for="telefono" class="mr-2">Telefono:</label>
-                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Ingrese numero de contacto" required>
+                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Ingrese numero de contacto" value="<?php echo htmlspecialchars($fila['Telefono'] ?? ''); ?>" required>
                 
                 <label for="correo" class="mr-2">Correo electronico:</label>
-                <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese correo" required>
+                <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese correo" value="<?php echo htmlspecialchars($fila['Email'] ?? ''); ?>" required>
 
                 <label for="usuario" class="mr-2">Nombre de usuario:</label>
-                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingrese un usuario" required>
+                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingrese un usuario" value="<?php echo htmlspecialchars($fila['Usuario'] ?? ''); ?>" required>
 
                 </script>
             </div>
