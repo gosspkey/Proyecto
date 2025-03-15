@@ -27,35 +27,35 @@
         </div>
         <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
-    <form action="../controlador/usuariocont.php" method="POST" class="container">
+    <form action="../../controlador/equiposcont.php" method="POST" class="container">
         <h2 class="titulo text-center"> <strong>Registra Tabletas</strong></h2> 
         <div class="row">
             <div class="col-md-6">
                 <img src="../img/tablet651.png" class="img-fluid" alt="" width="300px">
             </div>
             <div class="container mt-5 col-md-6 form1 form-group">
-                <label for="usuario" class="mr-2">Nombre completo:</label>
-                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingrese su nombre completo" required>
+                <label for="placa" class="mr-2">Placa:</label>
+                <input type="text" class="form-control" id="placa" name="placa" placeholder="Ingrese el numero de placa" required>
 
-                <label for="contraseña" class="mr-2">Ficha:</label>
-                <input type="text" class="form-control" name="contraseña" id="contraseña" placeholder="Ingrese el numero de ficha" required>
-                <label for="t-camara" class="mr-2">¿Que tablets deseas reservar?</label>
-                <select name="t-camara" id="t-camara" class="form-control" required>
-                    <option value="">Seleccione una opción</option>
-                    <option value="op1">PEN TABLET PTH-65</option>
-                    <option value="op1">PEN TABLET PTH-850</option>
-                    <option value="op2">Wacom One</option>
+                <label for="descripcion" class="mr-2">Descripcion:</label>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese una descripcion" required>
+
+                <label for="tableta" class="mr-2">¿Que tablets deseas registrar?</label>
+                <select name="tableta" id="tableta" class="form-control" required>
+                    <option value="PEN TABLET PTH-65">PEN TABLET PTH-65</option>
+                    <option value="PEN TABLET PTH-850">PEN TABLET PTH-850</option>
+                    <option value="Wacom One">Wacom One</option>
                 </select>
             </div>    
         </div>
         <div class="d-flex justify-content-center button-center">
             <div class="button">
                 <a href=""></a>
-                <button class="btn custom-button" type="submit" onclick="return showAlert()">Reservar</button>
+                <button class="btn custom-button" type="submit" >Registra</button>
                 
             </div>
             <div class="button">
-                <a href="../principal/equipos.html">
+                <a href="../principal/admin.html">
                 <button class="btn custom-button" type="button">Cancelar</button>
                 </a>
             </div>
