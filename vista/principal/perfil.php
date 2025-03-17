@@ -19,7 +19,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a style="position: relative; left: 170px; " class="nav-link" href="#">Ayuda</a>
+                        <a style="position: relative; left: 170px;" class="nav-link" href="../principal/centro de ayuda.html">Ayuda</a>
                     </li>
                 </ul>
             </div>
