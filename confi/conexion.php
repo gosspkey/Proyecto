@@ -20,7 +20,7 @@ class Database {
 
             if($this->conn) {
                 echo "<br>";
-                echo "Se realizó la conexión a la base de datos " . $this->db_name;
+                $this->db_name;
                 echo "<br>";
             }
         } catch(PDOException $exception) {
