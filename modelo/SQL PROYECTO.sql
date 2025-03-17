@@ -11,7 +11,7 @@ Telefono varchar(100) not null,
 Email varchar(100) not null,
 Ficha varchar(100) not null,
 Usuario  varchar(100) not null,
-Rol enum ('aprndiz','Administrador') not null,
+Rol enum ('Estudiante','Administrador') not null,
 Contraseña  varchar(100) not null
 );
 describe Usuario;
@@ -28,9 +28,11 @@ Contraseñain  varchar(100) not null
 );
 describe Instructores;
 
-create table Equipos(
+create table Tabletas(
 CodEquipo int primary key auto_increment not null,
+Placa text,
 Descripcion text,
+Tableta enum('PEN TABLET PTH-65','PEN TABLET PTH-850','Wacom One') NOT NULL,
 Usua int unique,
 foreign key(Usua) references  Usuario(IDUsuario) on delete cascade
 );
@@ -39,15 +41,8 @@ idAdministrador int primary key auto_increment not null,
 Anotaciones varchar(100),
 idUsuario int,
 codequipo int,
-foreign key (idUsuario) references  Usuario(IDUsuario) on delete cascade,
-foreign key (codequipo) references  Equipos(CodEquipo) on delete cascade
+foreign key (idUsuario) references  Usuario(IDUsuario) on delete cascade
 );
 
 
-create table prestamo(
-Codreser int primary key auto_increment,
-idusua int,
-idequi int, 
-foreign key (idusua) references  Usuario(IDUsuario) on delete cascade,
-foreign key (idequi) references  Equipos(CodEquipo) on delete cascade
-);
+
