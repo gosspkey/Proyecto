@@ -72,7 +72,7 @@ if (!$ins || $ins->rowCount()==0){
                     <td>".$f["Contraseñain"]. "</td>
                     <td>
 
-                    <a href='actualizar.php?id=" . $f["IDinstructor"] . "' class='custom-button'>Actualizar</a>
+                    <a href='actuainst.php?id=" . $f["IDinstructor"] . "' class='custom-button'>Actualizar</a>
                     <a href='borrarinstu.php?id=" . $f["IDinstructor"] . "' class='custom-button'>Borrar</a>
 
          

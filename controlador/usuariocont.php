@@ -54,6 +54,7 @@ class UsuarioControlador {
         } else {
             echo "Error al registrar el instructor.";
         }
+        
     }
 
     public function validaringreso($usuario, $password) {
