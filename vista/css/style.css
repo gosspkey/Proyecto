@@ -12,8 +12,6 @@ body{
         border-bottom-color: #eeeeee;
     }
     .listM a {
-     
-        vertical-align: middle;
         
         height:30px ;
         display:block; 
@@ -35,9 +33,7 @@ body{
         border-bottom-color: #eeeeee;
     }
     .listM2 a {
-     
-        vertical-align: middle;
-        
+             
         height:40px ;
         display:block; 
         width:100%;
@@ -48,9 +44,7 @@ body{
         font-size:11px;
         color:white;
        
-    }
-
-    .listM2 a:hover {
+    
             transition: 0.3s;
            padding-left: 20px;
       
