@@ -77,5 +77,22 @@ class Tabletas {
         $consulta->execute();
         return $consulta;
     }
+
+    public function eliminarEquipo() {
+        $query = "DELETE FROM " . $this->table . " WHERE CodEquipo = :CodEquipo";
+        $stmt = $this->conn->prepare($query);
+    
+        $stmt->bindParam(':CodEquipo', $this->id);
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            $errorInfo = $stmt->errorInfo();
+            echo "Error al eliminar el equipo: " . $errorInfo[2];
+            return false;
+        }
+    }
+    
+    
 }
 ?>

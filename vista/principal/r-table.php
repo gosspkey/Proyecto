@@ -42,15 +42,19 @@ $tabletas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
 
-    <form action="../controlador/reservascont.php" method="POST" class="container">
+    <form action="../../controlador/reservacont.php" method="POST" class="container">
         <h2 class="titulo text-center"><strong>Reserva de Tablet</strong></h2>
         <div class="row">
             <div class="col-md-6">
                 <img src="../img/tablet651.png" class="img-fluid" alt="Tablet Image" width="300px">
             </div>
             <div class="container mt-5 col-md-6 form1 form-group">
+
+            <label for="FechaReserva">Fecha de Reserva:</label>
+            <input type="date" class="form-control" name="FechaReserva" id="FechaReserva" required>
+
                 <label for="ficha" class="mr-2">Número de Ficha:</label>
-                <input type="text" class="form-control" name="ficha" id="ficha" placeholder="Ingrese el número de ficha" required>
+                <input type="text" class="form-control" name="fichausu" id="fichausu" placeholder="Ingrese el número de ficha" required>
 
                 <label for="CodEquipo" class="mr-2">¿Qué tablet deseas reservar?</label>
                 <select name="CodEquipo" id="CodEquipo" class="form-control" required>
