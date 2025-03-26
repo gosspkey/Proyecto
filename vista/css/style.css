@@ -136,7 +136,7 @@ body{
         background: url('https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sqWw7ZyWrqHM7H95kmnmXhI4fDBjd13OgYOiOcVPqaq0rQV8JwJ7K9IHBzaNlOS3QrOX8kM04T79gn2PG67mH5jwZrplVSps61hSwMqXjbrHNPATg6_YPcDBA=s0-d') 0 0px;
    }
 
-.container{
+container{
     display: flex;
     align-items: center;
 }
@@ -228,7 +228,7 @@ input::placeholder{
     margin-left:2% ;
 }
 
-.formtxt a{
+.form a{
     color: #5EA617;
     font-size: 14px;
     font-weight: 600;
@@ -243,7 +243,7 @@ input::placeholder{
     border-radius: 25px;
     cursor: pointer;
     box-shadow: 0 0 20px rgb(97, 130, 123);
-    background-color: rgb(157, 204, 209) ;
+    background-color: rgb(157, 209, 163) ;
 }
 
 .formbtn :hover{
