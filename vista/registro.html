@@ -89,19 +89,19 @@
             </div>
         </div>
         <div class="text-center mt-4">
-            <button class="btn btn-success custom-button" type="submit">Registrarse</button>
+            <button class="btn btn-success custom-button btninicio" type="submit">Registrarse</button>
         </div>
         <br><br>
         <div class="container">
             <div class="row">
-                <div class="formtxt col-md-4">
-                    <a href="../vista/principal/olvidocontraseña.html">¿Olvidaste tu contraseña?</a>
+                <div class="formtxt col-md-4 links">
+                    <a  class="links mx-2" href="../vista/principal/olvidocontraseña.html">¿Olvidaste tu contraseña?</a>
                 </div>
                 <div class="formtxt">
-                    <a href="../vista/iniciosesion.html">¿Ya tienes una cuenta? <br> <strong>Iniciar sesion</strong></a>
+                    <a class="links mx-2" href="../vista/iniciosesion.html">¿Ya tienes una cuenta? <br> <strong>Iniciar sesion</strong></a>
                 </div>
-                <div class="formtxt col-md-4">
-                    <a href="#">Terminos y condiciones</a>
+                <div class="formtxt col-md-4 ">
+                    <a href="#" class="links mx-2">Terminos y condiciones</a>
                 </div>
             </div>
         </div>
@@ -109,6 +109,20 @@
 
     <footer class="mt-5 border-top">
         <style>
+            .btninicio {
+                background-color: #5EA617;
+                border: none;
+                color: white;
+                margin-top: 10px;
+                }
+            .links-container a {
+                text-decoration: none;
+                color:#5EA617;
+                }
+            .links-container a:hover {
+                background-color: #e0f0d0;
+                border-radius: 20px;
+                }
             footer {
                 background-color: #5EA617;
                 color: white;
