@@ -19,88 +19,102 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
+                        <a style="position: relative; left: 170px;" class="nav-link" href="../vista/iniciosesion.html">Inicio sesion</a>
+                    </li>
+                    <li class="nav-item">
                         <a style="position: relative; left: 170px; " class="nav-link" href="#">Ayuda</a>
                     </li>
                 </ul>
             </div>
-           
         </div>
         <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+<?php
     require_once('../../modelo/instructor.php');
-    $db = new Database(); // Aquí se crea la conexión a la base de datos
+    require_once('../../confi/conexion.php');
+    $database = new Database();
+    $db = $database->getConnection();
     $instructor = new Instructores($db);
 
-    // Capturar datos del formulario
-    $instructor->id = $_POST['id']; // Aquí debes asegurarte de tener el ID en el formulario
-    $instructor->nombrein = $_POST['nombrein'];
-    $instructor->apellidoin = $_POST['apellidoin'];
-    $instructor->identiin = $_POST['identiin'];
-    $instructor->documentoin = $_POST['documentoin'];
-    $instructor->emailin = $_POST['emailin'];
-    $instructor->usuarioin = $_POST['usuarioin'];
-    $instructor->contrain = $_POST['contrain'];
-
-    // Verificar si es para actualizar o registrar
-    if (isset($_POST['actualizar'])) {
-        $instructor->actualizarins();
-    } else {
-        $instructor->registrarinstru();
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $instructor->id = $id;
+        $data = $instructor->idisns();
+        if ($data) {
+            $fila = $data;
+        }
     }
-}
-?>
 
-    <form action="../../controlador/usuariocont.php" method="POST" class="container">
-    <input type="hidden" name="id" id="id" value="<?php echo $fila['IDinstructor']; ?>">
-    <h2 class="titulo text-center"> <strong>Registro Instructor</strong></h2>
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $instructor->id = $_POST['IDInstructor'];
+        $instructor->nombrein = $_POST['nombre'];
+        $instructor->apellidoin = $_POST['apellido'];
+        $instructor->identiin = $_POST['identi'];
+        $instructor->documentoin = $_POST['documento'];
+        $instructor->emailin = $_POST['correo'];
+        $instructor->usuarioin = $_POST['usuario'];
+        
+        // Solo encriptamos la contraseña si ha sido cambiada
+        if (!empty($_POST['contraseña'])) {
+            $instructor->contrain = $_POST['contraseña'];
+        } else {
+            // Mantenemos la contraseña existente si no se ha cambiado
+            $instructor->contrain = $fila['Contraseñain'];
+        }
+
+        if ($instructor->actualizarins()) {
+            echo "Instructor actualizado correctamente.";
+        } else {
+            echo "Error al actualizar el instructor.";
+        }
+    }
+    ?>
+
+    <form action="actuainst.php?id=<?php echo $instructor->id; ?>" method="POST" class="container">
+        <input type="hidden" name="IDInstructor" value="<?php echo $fila['IDinstructor']; ?>">
+        <h2 class="titulo text-center"> <strong>Actualizar Instructor</strong></h2>
         <div class="row">
             <div class="container mt-5 col-md-6 form1 form-group">
                 <label for="nombre" class="mr-2">Nombre(s):</label>
-                <input type="text" class="form-control" id="nombrein" name="nombrein" placeholder="Ingrese su nombre" required>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" value="<?php echo $fila['Nombrein']; ?>" required>
 
                 <label for="apellido" class="mr-2">Apellidos:</label>
-                <input type="text" class="form-control" name="apellidoin" id="apellidoin" placeholder="Ingrese sus apellidos" required>
+                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingrese sus apellidos" value="<?php echo $fila['Apellidoin']; ?>" required>
 
                 <label for="identi" class="mr-2">Tipo de documento:</label>
-                <select name="identiin" id="identiin" class="form-control">
-                    <option value="C.C">C.C</option>
-                    <option value="T.I">T.I</option>
-                    <option value="C.E">C.E</option>
-                    <option value="P.P.T">P.P.T</option>
+                <select name="identi" id="identi" class="form-control">
+                    <option value="C.C" <?php echo ($fila['Identificacionin'] == 'C.C') ? 'selected' : ''; ?>>C.C</option>
+                    <option value="T.I" <?php echo ($fila['Identificacionin'] == 'T.I') ? 'selected' : ''; ?>>T.I</option>
+                    <option value="C.E" <?php echo ($fila['Identificacionin'] == 'C.E') ? 'selected' : ''; ?>>C.E</option>
+                    <option value="P.P.T" <?php echo ($fila['Identificacionin'] == 'P.P.T') ? 'selected' : ''; ?>>P.P.T</option>
                 </select>
 
-                <label for="documento" class="mr-2">Numero de documento:</label>
-                <input type="text" class="form-control" name="documentoin" id="documentoin" placeholder="Ingrese su numero del documento" required>
+                <label for="documento" class="mr-2">Número de documento:</label>
+                <input type="text" class="form-control" name="documento" id="documento" placeholder="Ingrese su número del documento" value="<?php echo $fila['Documentoin']; ?>" required>
 
-               
-                
-                <label for="correo" class="mr-2">Correo electronico:</label>
-                <input type="email" class="form-control" name="emailin" id="emailin" placeholder="Ingrese correo" required>
+                <label for="correo" class="mr-2">Correo electrónico:</label>
+                <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese correo" value="<?php echo $fila['Emailin']; ?>" required>
             </div>
 
             <div class="container mt-5 col-md-6 form1 form-group">
-
                 <label for="usuario" class="mr-2">Nombre de usuario:</label>
-                <input type="text" class="form-control" name="usuarioin" id="usuarioin" placeholder="Ingrese un usuario" required>
+                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingrese un usuario" value="<?php echo $fila['Usuarioin']; ?>" required>
 
                 <label for="contraseña" class="mr-2">Contraseña:</label>
-                <input type="password" class="form-control" name="contrain" id="contrain" placeholder="Ingrese su contraseña" required>
+                <input type="password" class="form-control" name="contraseña" id="contraseña" placeholder="Ingrese su contraseña">
                 <span class="vercontra" onclick="vercontra('contraseña', this)">👁️‍🗨️</span>
                 <script>
                     function vercontra(id, element) {
                         const passwordInput = document.getElementById(id);
                         const passwordType = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                         passwordInput.setAttribute('type', passwordType);
-                        // Cambiar el símbolo de la lectura de la contraseña
                         element.textContent = passwordType === 'password' ? '👁️‍🗨️' : '👀';
                     }
                 </script>
             </div>
         </div>
         <div class="text-center mt-4">
-        <button class="btn btn-warning custom-button" type="submit" name="actualizar">Actualizar</button>
+            <button class="btn btn-success custom-button" type="submit">Guardar cambios</button>
         </div>
         <br><br>
         <div class="container">
@@ -109,10 +123,10 @@
                     <a href="../vista/principal/olvidocontraseña.html">¿Olvidaste tu contraseña?</a>
                 </div>
                 <div class="formtxt">
-                    <a href="../vista/iniciosesion.html">¿Ya tienes una cuenta? <br> <strong>Iniciar sesion</strong></a>
+                    <a href="../vista/iniciosesion.html">¿Ya tienes una cuenta? <br> <strong>Iniciar sesión</strong></a>
                 </div>
                 <div class="formtxt col-md-4">
-                    <a href="#">Terminos y condiciones</a>
+                    <a href="#">Términos y condiciones</a>
                 </div>
             </div>
         </div>
@@ -131,7 +145,7 @@
                 color: white !important;
             }
         </style>
-        <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
+       <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
             <img class="footer-logo" src="../img/tecno sena logo blanco.PNG" alt="Logo">
             <h2>Tecno-Sena</h2>
             <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
@@ -146,7 +160,7 @@
             </div>
             <div class="iconos tel col-md-2">
                 <p> 
-                    <strong>Telefono:</strong> 
+                    <strong>Teléfono:</strong> 
                     <br> 
                     +573222175535
                 </p>
@@ -165,26 +179,5 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="estilos.js"></script>
 </body>
 </html>
-<?php
-// Consultar los datos del instructor a editar
-require_once('../../modelo/instructor.php');
-$db = new Database();
-$instructor = new Instructores($db);
-
-if (isset($_GET['id'])) {
-    $instructor->id = $_GET['id'];
-    $datos = $instructor->idisns(); // Función para consultar instructor por ID
-    if ($datos) {
-        $nombrein = $datos['Nombrein'];
-        $apellidoin = $datos['Apellidoin'];
-        $identiin = $datos['Identificacionin'];
-        $documentoin = $datos['Documentoin'];
-        $emailin = $datos['Emailin'];
-        $usuarioin = $datos['Usuarioin'];
-    }
-}
-?>
-<input type="text" class="form-control" id="nombrein" name="nombrein" value="<?php echo $nombrein; ?>" required>
