@@ -34,29 +34,68 @@
         </div>
         <img src="../vista/img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
-    <form action="../controlador/usuariocont.php" method="POST" class="fondo" style="margin: 100px auto; max-width: 800px; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <form action="../controlador/usuariocont.php" method="POST" class="container">
         <h2 class="titulo text-center mb-4"> <strong>Inicio de Sesión</strong></h2>
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <div class="form-group">
+        <div class="row">
+            
+            <div class="container mt-5 col-md-6 form1 form-group">
                     <label for="usuario" class="mb-2">Usuario:</label>
                     <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingrese su usuario" required>
     
                     <label for="contraseña" class="mb-2 mt-3">Contraseña:</label>
                     <input type="password" class="form-control" name="contraseña" id="contraseña" placeholder="Ingrese su contraseña" required>
                     <span class="vercontra" onclick="vercontra('contraseña', this)" style="cursor: pointer; margin-left: 5px;">👁️‍🗨️</span>
-                </div>
-                <div class="text-center mt-4">
-                    <button class="btn btn-success custom-button" type="submit" style="width: 100%;">Iniciar Sesión</button>
-                </div>
-                <div class="text-center mt-3">
-                    <a href="../vista/principal/olvidocontraseña.html" class="d-block">¿Olvidaste tu contraseña?</a>
-                    <a href="../vista/registro.html" class="d-block">¿Aún no tienes una cuenta? <strong>REGISTRAR</strong></a>
-                    <a href="#" class="d-block">Términos y condiciones</a>
-                </div>
+
+                    <script>
+                        function vercontra(id, element) {
+                            const passwordInput = document.getElementById(id);
+                            const passwordType = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                            passwordInput.setAttribute('type', passwordType);
+                            // Cambiar el símbolo de la lectura de la contraseña
+                            element.textContent = passwordType === 'password' ? '👁️‍🗨️' : '👀';
+                        }
+                    </script>
+
+                    <div class="text-center mt-4">
+                        <button class="btn btn-success custom-button btninicio" type="submit" style="width: 100%;">Iniciar Sesión</button>
+                    </div>
+                    <div class="text-center mt-3 d-flex justify-content-center links-container">
+                        <a href="../vista/principal/olvidocontraseña.html" class="links mx-2">¿Olvidaste tu contraseña?</a>
+                        <a href="../vista/registro.html" class="links mx-2">¿Aún no tienes una cuenta? <strong>REGISTRAR</strong></a>
+                        <a href="#" class="links mx-2">Términos y condiciones</a>
+                        <style>
+                            .btninicio {
+                                background-color: #5EA617;
+                                border: none;
+                                color: white;
+                                margin-top: 10px;
+                                width: 5px;
+                            }
+                            .links-container a {
+                                text-decoration: none;
+                                color:#5EA617;
+                            }
+                            .links-container a:hover {
+                                background-color: #e0f0d0;
+                                border-radius: 20px;
+                                
+                            }
+
+                            
+                            
+                        </style>
+                    </div>
             </div>
-            <div class="col-md-6 text-center">
-                <img src="img/img-form-inicio de sesion.png" alt="Inicio de Sesión" style="width: 100%; max-width: 400px; height: auto; margin-top: -20px;">
+            
+            <div class="col-md-6">
+                <img src="img/img-form-inicio de sesion.png" class="img-fluid" alt="" width="400px">
+                
+            </div> 
+               
+        </div>
+        
+        <div class="row align-items-center">
+            <div class="col-md-6">
             </div>
         </div>
     </form>
