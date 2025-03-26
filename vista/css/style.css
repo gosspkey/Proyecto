@@ -436,18 +436,21 @@ h2{
 /*Tabla*/
 .col-eq {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 20px;
     
   }
 
-  .col-tab {
+.col-tab {
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 20px;
+    padding: 2px;
     text-align: center;
-    box-shadow: 0 0px 12px rgba(0,0,0,0.175);
-  }
+
+    box-shadow: 0 0px 1px rgba(0,0,0,0.175);
+    width: var(--col-tab-width, 350px); /* Tamaño ajustable por variable CSS */
+    height: var(--col-tab-height, 350px); /* Tamaño ajustable por variable CSS */
+}
 
   .col-tab img {
     max-width: 100%;
