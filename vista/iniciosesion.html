@@ -46,19 +46,24 @@
                     <input type="password" class="form-control" name="contraseña" id="contraseña" placeholder="Ingrese su contraseña" required>
                     <span class="vercontra" onclick="vercontra('contraseña', this)" style="cursor: pointer; margin-left: 5px;">👁️‍🗨️</span>
 
+                    <script>
+                        function vercontra(id, element) {
+                            const passwordInput = document.getElementById(id);
+                            const passwordType = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                            passwordInput.setAttribute('type', passwordType);
+                            // Cambiar el símbolo de la lectura de la contraseña
+                            element.textContent = passwordType === 'password' ? '👁️‍🗨️' : '👀';
+                        }
+                    </script>
+
                     <div class="text-center mt-4">
                         <button class="btn btn-success custom-button btninicio" type="submit" style="width: 100%;">Iniciar Sesión</button>
                     </div>
-                    <div class="text-center mt-3">
-                        <a href="../vista/principal/olvidocontraseña.html" class="d-block links">¿Olvidaste tu contraseña?</a>
-                        <a href="../vista/registro.html" class="d-block  links">¿Aún no tienes una cuenta? <strong>REGISTRAR</strong></a>
-                        <a href="#" class="d-block links">Términos y condiciones</a>
+                    <div class="text-center mt-3 d-flex justify-content-center links-container">
+                        <a href="../vista/principal/olvidocontraseña.html" class="links mx-2">¿Olvidaste tu contraseña?</a>
+                        <a href="../vista/registro.html" class="links mx-2">¿Aún no tienes una cuenta? <strong>REGISTRAR</strong></a>
+                        <a href="#" class="links mx-2">Términos y condiciones</a>
                         <style>
-                            .links {
-                                display: block;
-                                margin-top: 10px;
-                                color: #5EA617;
-                            }
                             .btninicio {
                                 background-color: #5EA617;
                                 border: none;
@@ -66,6 +71,18 @@
                                 margin-top: 10px;
                                 width: 5px;
                             }
+                            .links-container a {
+                                text-decoration: none;
+                                color:#5EA617;
+                            }
+                            .links-container a:hover {
+                                background-color: #e0f0d0;
+                                border-radius: 20px;
+                                
+                            }
+
+                            
+                            
                         </style>
                     </div>
             </div>
