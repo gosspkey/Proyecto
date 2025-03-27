@@ -57,39 +57,43 @@ class UsuarioControlador {
         
     }
 
-    public function validaringreso($usuario, $password) {
-        $this->usu->usuario = $usuario;
-        $this->usu->contra = $password;
+public function validaringreso($usuario, $password) {
+    $this->usu->usuario = $usuario;
+    $this->usu->contra = $password;
 
-        if ($this->usu->ingresar()) {
-            // Iniciar sesión
-            session_start();
-            // Definir las variables de sesión
-            $_SESSION['id'] = $this->usu->id;
-            $_SESSION['usuario'] = $this->usu->usuario;
-            $_SESSION['rol'] = $this->usu->rol;
+    if ($this->usu->ingresar()) {
+        // Iniciar sesión
+        session_start();
 
-            // Verificar que las variables de sesión están establecidas
-            echo "ID del usuario en sesión: " . $_SESSION['id'] . "<br>";
-            echo "usuario: " . $_SESSION['usuario'] . "<br>";
-            echo "correo: " . $_SESSION['correo'] . "<br>";
+        // Definir las variables de sesión
+        $_SESSION['id'] = $this->usu->id;
+        $_SESSION['usuario'] = $this->usu->usuario;
+        $_SESSION['rol'] = $this->usu->rol;
+        $_SESSION['correo'] = $this->usu->correo ?? null; // Asegúrate de que $this->usu->correo esté configurado
 
-            // Redirigir según el rol
-            ob_start(); // Inicia el buffer de salida
-            if ($_SESSION['rol'] === 'Administrador') {
-                header("Location:../vista/principal/admin.html");
-                ob_end_flush(); // Enviar el buffer de salida
-                exit;
-            } elseif ($_SESSION['rol'] === 'Estudiante') {
-                header("Location: ../vista/principal/equipos.html");
-                ob_end_flush(); // Enviar el buffer de salida
-                exit;
-            } 
-        } else {
-            echo "Error: Credenciales incorrectas";
+        // Verificar que las variables de sesión están establecidas
+        echo "Variables de sesión configuradas:<br>";
+        echo "ID del usuario: " . $_SESSION['id'] . "<br>";
+        echo "Usuario: " . $_SESSION['usuario'] . "<br>";
+        echo "Rol: " . $_SESSION['rol'] . "<br>";
+        echo "Correo: " . $_SESSION['correo'] . "<br>";
+
+        // Redirigir según el rol
+        ob_start(); // Inicia el buffer de salida
+        if ($_SESSION['rol'] === 'Administrador') {
+            header("Location: ../vista/principal/admin.html");
+            ob_end_flush(); // Enviar el buffer de salida
+            exit;
+        } elseif ($_SESSION['rol'] === 'Estudiante') {
+            header("Location: ../vista/principal/equipos.html");
+            ob_end_flush(); // Enviar el buffer de salida
+            exit;
         }
-        return false;
+    } else {
+        echo "Error: Credenciales incorrectas";
     }
+    return false;
+}
 }
 
 // Manejar la solicitud POST

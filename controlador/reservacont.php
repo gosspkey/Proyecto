@@ -4,52 +4,51 @@ require_once('../modelo/reservas.php');
 require_once('../modelo/tabletas.php');
 require_once('../modelo/usuario.php');
 
+session_start(); // iniciar la sesión
 
-session_start(); // Asegura que los datos de la sesión estén disponibles
+// conexión a la base de datos
+$database = new Database();
+$db = $database->getConnection();
+
+// depuracion
+if (!isset($_SESSION['id'])) {
+    echo "Error: No se ha iniciado sesión o el ID del usuario no está disponible.";
+    exit;
+}
+
+echo "ID del usuario en sesión: " . $_SESSION['id']; // Depuración para verificar el id del usuario
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_SESSION['id']; // ID del usuario desde la sesión
-    $CodEquipo = $_POST['CodEquipo'] ?? null; // Código de la tableta seleccionada
-    $fichausu = $_POST['fichausu'] ?? null; // Número de ficha del usuario
-    $FechaReserva = $_POST['FechaReserva']; // Fecha de la reserva
-  
-  
-  $query = "INSERT INTO Reservas (IDUsuario, CodEquipo, FechaReserva) 
-    VALUES (:IDUsuario, :CodEquipo, :FechaReserva)";
-$stmt = $db->prepare($query);
-$stmt->bindParam(':IDUsuario', $IDUsuario);
-$stmt->bindParam(':CodEquipo', $CodEquipo);
-$stmt->bindParam(':fichausu', $fichausu);
-$stmt->bindParam(':FechaReserva', $FechaReserva);
-$stmt->execute();
+    $id = $_SESSION['id']; // id del usuario desde la sesión
+    $CodEquipo = $_POST['CodEquipo'] ?? null; // codigo de la tableta seleccionada
+    $Fichausu = $_POST['fichausu'] ?? null; // ficha del usuario
+    $FechaReserva = $_POST['FechaReserva'] ?? null; // fecha de la reserva
 
-    if (!$IDUsuario || !$CodEquipo) {
+    // valores recibidos
+    var_dump($id, $CodEquipo, $Fichausu, $FechaReserva);
+
+    // Validar que los datos requeridos estén presentes
+    if (!$id || !$CodEquipo || !$Fichausu || !$FechaReserva) {
         echo "Faltan datos para realizar la reserva.";
         exit;
     }
 
-    $database = new Database();
-    $db = $database->getConnection();
+    // Preparar la consulta para insertar la reserva
+    $query = "INSERT INTO Reservas (IDUsuario, CodEquipo, Fichausu, FechaReserva) 
+              VALUES (:IDUsuario, :CodEquipo, :Fichausu, :FechaReserva)";
+    $stmt = $db->prepare($query);
 
-    // Instancia de reserva
-    $reserva = new Reservas($db);
-    $reserva->IDUsuario = $IDUsuario;
-    $reserva->CodEquipo = $CodEquipo;
+    // Vincular los parámetros correctamente
+    $stmt->bindValue(':IDUsuario', $id, PDO::PARAM_INT);
+    $stmt->bindValue(':CodEquipo', $CodEquipo, PDO::PARAM_INT);
+    $stmt->bindValue(':Fichausu', $Fichausu, PDO::PARAM_STR);
+    $stmt->bindValue(':FechaReserva', $FechaReserva, PDO::PARAM_STR);
 
-    // Instancia para eliminar la tableta
-    $tableta = new Tabletas($db);
-    $tableta->id = $CodEquipo;
-
-    // Procesar la reserva
-    if ($reserva->crearReserva() && $tableta->eliminarEquipo()) {
+    try {
+        $stmt->execute();
         echo "Reserva registrada correctamente.";
-
-        // Notificación al administrador (alerta o correo)
-        $mensaje = "El aprendiz $nombreUsuario ha reservado la tableta con ID $CodEquipo.";
-        echo "<script>alert('$mensaje');</script>";
-
-    } else {
-        echo "Error al procesar la reserva.";
+    } catch (Exception $e) {
+        echo "Error al realizar la reserva: " . $e->getMessage();
     }
 }
 ?>

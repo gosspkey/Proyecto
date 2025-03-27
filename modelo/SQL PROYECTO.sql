@@ -44,5 +44,15 @@ codequipo int,
 foreign key (idUsuario) references  Usuario(IDUsuario) on delete cascade
 );
 
+CREATE TABLE Reservas (
+    IDReserva INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    IDUsuario INT NOT NULL,
+    CodEquipo INT NOT NULL,
+    Fichausu varchar(100) not null,
+    FechaReserva TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (IDUsuario) REFERENCES Usuario(IDUsuario) ON DELETE CASCADE,
+    FOREIGN KEY (CodEquipo) REFERENCES Tabletas(CodEquipo) ON DELETE CASCADE
+);
+
 
 
