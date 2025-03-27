@@ -4,28 +4,25 @@ require_once('../modelo/reservas.php');
 require_once('../modelo/tabletas.php');
 require_once('../modelo/usuario.php');
 
-session_start(); // iniciar la sesión
+session_start(); // Iniciar la sesión
 
-// conexión a la base de datos
+// Conexión a la base de datos
 $database = new Database();
 $db = $database->getConnection();
 
-// depuracion
+// Depuración
 if (!isset($_SESSION['id'])) {
     echo "Error: No se ha iniciado sesión o el ID del usuario no está disponible.";
     exit;
 }
 
-echo "ID del usuario en sesión: " . $_SESSION['id']; // Depuración para verificar el id del usuario
+echo "ID del usuario en sesión: " . $_SESSION['id']; // Depuración para verificar el ID del usuario
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_SESSION['id']; // id del usuario desde la sesión
-    $CodEquipo = $_POST['CodEquipo'] ?? null; // codigo de la tableta seleccionada
-    $Fichausu = $_POST['fichausu'] ?? null; // ficha del usuario
-    $FechaReserva = $_POST['FechaReserva'] ?? null; // fecha de la reserva
-
-    // valores recibidos
-    var_dump($id, $CodEquipo, $Fichausu, $FechaReserva);
+    $id = $_SESSION['id']; // ID del usuario desde la sesión
+    $CodEquipo = $_POST['CodEquipo'] ?? null; // Código de la tableta seleccionada
+    $Fichausu = $_POST['fichausu'] ?? null; // Ficha del usuario
+    $FechaReserva = $_POST['FechaReserva'] ?? null; // Fecha de la reserva
 
     // Validar que los datos requeridos estén presentes
     if (!$id || !$CodEquipo || !$Fichausu || !$FechaReserva) {
@@ -33,22 +30,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Preparar la consulta para insertar la reserva
-    $query = "INSERT INTO Reservas (IDUsuario, CodEquipo, Fichausu, FechaReserva) 
-              VALUES (:IDUsuario, :CodEquipo, :Fichausu, :FechaReserva)";
-    $stmt = $db->prepare($query);
+    // Crear una instancia de la clase Reservas
+    $reserva = new Reservas($db);
+    $reserva->IDUsuario = $id;
+    $reserva->CodEquipo = $CodEquipo;
+    $reserva->fichausu = $Fichausu;
+    $reserva->FechaReserva = $FechaReserva;
 
-    // Vincular los parámetros correctamente
-    $stmt->bindValue(':IDUsuario', $id, PDO::PARAM_INT);
-    $stmt->bindValue(':CodEquipo', $CodEquipo, PDO::PARAM_INT);
-    $stmt->bindValue(':Fichausu', $Fichausu, PDO::PARAM_STR);
-    $stmt->bindValue(':FechaReserva', $FechaReserva, PDO::PARAM_STR);
+    var_dump($reserva);
 
-    try {
-        $stmt->execute();
-        echo "Reserva registrada correctamente.";
-    } catch (Exception $e) {
-        echo "Error al realizar la reserva: " . $e->getMessage();
+// Crear la reserva
+if ($reserva->crearReserva()) {
+    echo "Reserva registrada correctamente.<br>";
+
+    // Eliminar la tableta de la base de datos
+    if ($reserva->eliminarEquipo()) {
+        echo "Tableta eliminada correctamente de la base de datos.<br>";
+    } else {
+        echo "Error al eliminar la tableta.<br>";
     }
+
+    // Redirigir al usuario después de la reserva
+    header("Location: ../vista/principal/r-table.php");
+    exit;
+} else {
+    echo "Error al registrar la reserva.";
+}
 }
 ?>

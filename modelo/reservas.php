@@ -14,19 +14,20 @@ class Reservas {
 
     public function crearReserva() {
         $query = "INSERT INTO " . $this->table . " (IDUsuario, CodEquipo, Fichausu, FechaReserva)
-        VALUES (:IDUsuario, :CodEquipo, :fichausu, :FechaReserva)"; 
+                  VALUES (:IDUsuario, :CodEquipo, :fichausu, :FechaReserva)";
         $stmt = $this->conn->prepare($query);
-
+    
         $this->IDUsuario = htmlspecialchars(strip_tags($this->IDUsuario));
         $this->CodEquipo = htmlspecialchars(strip_tags($this->CodEquipo));
         $this->fichausu = htmlspecialchars(strip_tags($this->fichausu));
         $this->FechaReserva = htmlspecialchars(strip_tags($this->FechaReserva));
-
-        $stmt->bindParam(':idUsuario', $this->IDUsuario);
+    
+        // Vincular los parámetros correctamente
+        $stmt->bindParam(':IDUsuario', $this->IDUsuario);
         $stmt->bindParam(':CodEquipo', $this->CodEquipo);
         $stmt->bindParam(':fichausu', $this->fichausu);
         $stmt->bindParam(':FechaReserva', $this->FechaReserva);
-
+    
         if ($stmt->execute()) {
             return true;
         } else {
@@ -35,7 +36,21 @@ class Reservas {
             return false;
         }
     }
-
+    public function eliminarEquipo() {
+        $query = "DELETE FROM Tabletas WHERE CodEquipo = :CodEquipo";
+        $stmt = $this->conn->prepare($query);
+    
+        $stmt->bindParam(':CodEquipo', $this->CodEquipo);
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            $errorInfo = $stmt->errorInfo();
+            echo "Error al eliminar el equipo: " . $errorInfo[2];
+            return false;
+        }
+    }
+    
     
     
 }
