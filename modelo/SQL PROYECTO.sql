@@ -33,26 +33,22 @@ CodEquipo int primary key auto_increment not null,
 Placa text,
 Descripcion text,
 Tableta enum('PEN TABLET PTH-65','PEN TABLET PTH-850','Wacom One') NOT NULL,
-Usua int unique,
-foreign key(Usua) references  Usuario(IDUsuario) on delete cascade
+Usua int unique
 );
+
 create table Administrador(
 idAdministrador int primary key auto_increment not null,
 Anotaciones varchar(100),
 idUsuario int,
-codequipo int,
-foreign key (idUsuario) references  Usuario(IDUsuario) on delete cascade
+codequipo int
 );
 
 CREATE TABLE Reservas (
     IDReserva INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    IDUsuario INT NOT NULL,
-    CodEquipo INT NOT NULL,
-    Fichausu varchar(100) not null,
+    IDUsuario INT,
+    CodEquipo INT,
+    Fichausu VARCHAR(100) NOT NULL,
     FechaReserva TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (IDUsuario) REFERENCES Usuario(IDUsuario) ON DELETE CASCADE,
-    FOREIGN KEY (CodEquipo) REFERENCES Tabletas(CodEquipo) ON DELETE CASCADE
+    FOREIGN KEY (IDUsuario) REFERENCES Usuario(IDUsuario) ON DELETE SET NULL,
+    FOREIGN KEY (CodEquipo) REFERENCES Tabletas(CodEquipo) ON DELETE SET NULL
 );
-
-
-
