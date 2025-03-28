@@ -36,6 +36,15 @@ class Reservas {
             return false;
         }
     }
+
+    // Función para listar los usuarios registrados
+    public function listaresv() {
+        $query = "SELECT * FROM " . $this->table;
+        $consulta = $this->conn->prepare($query);
+        $consulta->execute();
+        return $consulta;
+    }
+
     public function eliminarEquipo() {
         $query = "DELETE FROM Tabletas WHERE CodEquipo = :CodEquipo";
         $stmt = $this->conn->prepare($query);
