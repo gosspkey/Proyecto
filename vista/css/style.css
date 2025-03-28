@@ -810,7 +810,14 @@ h3:hover{
 .links {
     display: block;
     margin-top: 10px;
-    color: #5EA617;
+    color: #68aa26;
+    text-decoration: none;
+}
+.links:hover {
+    background-color: #ddebcf;
+    color: #4b8413;
+    border-radius: 20px;
+    text-decoration: none;
 }
 
 
