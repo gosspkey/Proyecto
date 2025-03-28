@@ -1,0 +1,72 @@
+
+
+botones fondo verde 
+ <a style="display: inline-block; width: 150px; padding: 5px 10px; text-align: center;" class="links mx-2 d-inline-block text-center" 
+
+
+ class de botones fondo verde con transiccion en blanco y cambio de color al pasar el mouse
+  class="btnn btn-successs customm-button"
+
+  style de aliniacion de texto
+  style="position: relative; left: 60px;"
+  style="position: relative; right: 60px;"
+
+  modificacion de largo de las cajas de text0
+    #t-camara {
+        max-width: 460px;
+    }
+
+
+
+  registro.html
+  EN general bien falta modificacion del responsive  
+
+  index.html
+    EN general bien falta modificacion del responsive y cambiar imagenes
+
+ iniciosesion.html
+    EN general bien falta modificacion del responsive 
+
+
+ r.tripode.html
+    falta modificacion del responsive
+
+r.proyector.html 
+    falta modificacion del responsive
+
+r.microfonos.html
+    falta modificacion del responsive
+
+r.mezclador.html
+    falta modificacion del responsive
+
+r.luces.html
+    falta modificacion del responsive
+
+r.compu.html
+    falta modificacion del responsive
+
+r.camara.html
+    falta modificacion del responsive
+
+
+olvidocontraseña 
+falta responsive y texto debajo de boton
+
+equipos dis 
+falta responsive y imagenes
+
+equiposadmi
+falta responsive y imagenes
+
+equipos
+falta responsive y imagenes
+
+centro de ayuda
+modificacion general
+
+admin
+falta responsive y imagenes
+
+admtable
+falta responsive 
