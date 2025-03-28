@@ -29,7 +29,7 @@
     </nav>
 
 <?php
-require_once('../modelo/reservas.php');
+require_once('../../modelo/reservas.php');
 require_once('../../confi/conexion.php');
 $database = new Database();
 $db = $database->getConnection();

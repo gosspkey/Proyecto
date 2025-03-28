@@ -60,7 +60,7 @@
                 <input type="text" class="form-control" name="usuarioin" id="usuarioin" placeholder="Ingrese un usuario" required>
 
                 <label for="contraseña" class="mr-2">Contraseña:</label>
-                <input type="password" class="form-control" name="contrain" id="contrain" placeholder="Ingrese su contraseña" required>
+                <input type="password" class="form-control" name="contraseña" id="contraseña" placeholder="Ingrese su contraseña" required>
                 <span class="vercontra" onclick="vercontra('contraseña', this)">👁️‍🗨️</span>
                 <script>
                     function vercontra(id, element) {
@@ -73,20 +73,18 @@
                 </script>
             </div>
         </div>
-        <div class="text-center mt-4">
-            <button class="btn btn-success custom-button" type="submit">Registrarse</button>
+        <div class="text-center mt-4" style="position: relative; bottom: 80px;">
+            <button class="btn btn-success custom-button btninicio" type="submit">Registrarse</button>
         </div>
-        <br><br>
         <div class="container">
             <div class="row">
-                <div class="formtxt col-md-4">
-                    <a href="../vista/principal/olvidocontraseña.html">¿Olvidaste tu contraseña?</a>
+                <div class="formtxt col-md-6" style="position: relative; bottom: 50px;">
+                    <a class="links" href="../principal/tablainstu.php">¿Ya tiene una cuenta?  
+                        <br> Verifica que se encuentre registrado
+                    </a>
                 </div>
-                <div class="formtxt">
-                    <a href="../vista/iniciosesion.html">¿Ya tienes una cuenta? <br> <strong>Iniciar sesion</strong></a>
-                </div>
-                <div class="formtxt col-md-4">
-                    <a href="#">Terminos y condiciones</a>
+                <div class="formtxt col-md-4" style="position: relative; bottom: 40px;">
+                    <a class="links" href="#">Terminos y condiciones</a>
                 </div>
             </div>
         </div>
@@ -94,6 +92,23 @@
 
     <footer class="mt-5 border-top">
         <style>
+            .btninicio {
+                background-color: #5EA617;
+                color: #ffffff;
+                padding: 10px 20px;
+                border-radius: 20px;
+                text-decoration: none;
+                font-size: 18px;
+                border:none;
+                position: relative;
+                left: 0px;
+            }
+            .btninicio:hover {
+                background-color: white;
+                color: #5EA617;
+                border: 2px solid #5EA617;
+                transition: background-color 0.3s, color 0.3s, border 0.3s;
+            }
             footer {
                 background-color: #5EA617;
                 color: white;
