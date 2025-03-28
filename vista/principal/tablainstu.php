@@ -29,7 +29,7 @@
     </nav>
 
 <?php
-require_once('../../modelo/instructor.php');
+require_once('../modelo/instructor.php');
 require_once('../../confi/conexion.php');
 $database = new Database();
 $db = $database->getConnection();
