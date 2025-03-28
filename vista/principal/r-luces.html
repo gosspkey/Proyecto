@@ -31,7 +31,7 @@
         <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
     <form action="../controlador/usuariocont.php" method="POST" class="container">
-        <h2 class="titulo text-center"> <strong>Rerserva de Luces</strong></h2> 
+        <h2 class="titulo text-center"> <strong>Reserva de Luces</strong></h2> 
         <div class="row">
             <div class="col-md-6">
                 <img src="../img/Luz650.png" class="img-fluid" alt="" width="300px">
@@ -44,6 +44,11 @@
                 <input type="text" class="form-control" name="ficha" id="ficha" placeholder="Ingrese el numero de ficha" required>
 
                 <label for="t-camara" class="mr-2">¿Que luz deseas reservar?</label>
+                <style>
+                    #t-camara {
+                        max-width: 460px;
+                    }
+                </style>
                 <select name="t-camara" id="t-camara" class="form-control" required>
                     <option value="">Seleccione una opción</option>
                     <option value="op1">Luz ARRI 650 plus</option>

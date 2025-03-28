@@ -823,7 +823,7 @@ h3:hover{
 
 .btnn {
     padding: 10px;
-    border-radius: 15px;
+    border-radius: 20px;
   }
   
   .btn-successs {
@@ -839,10 +839,12 @@ h3:hover{
   .btnn:hover {
     background-color: #ffffff;
     color: #5EA617;
+    border: none;
 
 }
 
 
 .texttext{
     color: #5EA617;
+
 }
