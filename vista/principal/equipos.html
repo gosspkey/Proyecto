@@ -20,9 +20,28 @@
 </head>
 <body>
     <style>
-        body{
-            background-color:#eaf3df;
+        body {
+            background-color: #eaf3df;
         }
+        .search-container {
+            max-width: 600px; /* Reduce el ancho máximo del contenedor general */
+            margin: 0 auto; /* Centra el contenedor */
+            padding-left: 100px; 
+            padding-right: 100px;
+            padding-top: 20px; /* Espacio superior */}
+        .search-card .card-title {
+            font-size: 15px; /* Ajusta el tamaño del título */
+        }
+        .search-card .card {
+            padding: 0px; /* Reduce el espacio interno de las tarjetas */
+            width: 300px; /* Reduce el ancho del recuadro */
+            height: 100px; /* Ajusta la altura automáticamente */
+        }
+        #resultsContainer{
+            margin-left: 1px;
+            max-width: 339px;
+        }
+    
     </style>
     <nav class="navbar navbar-expand-lg navbar-light" size="10000px">
         <div class="container">
@@ -63,12 +82,74 @@
                     <a href="r-compu.html">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h5 class="card-title">COMPUTADORES</h5>
+                                <h5 class="card-title">Portatiles</h5>
                             </div>
                         </div>
                     </a>
                 </div>
-                <!-- Agregar más elementos a buscar -->
+                <div class="col-md-12 search-card">
+                    <a href="r-camara.html">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Camaras</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-12 search-card">
+                    <a href="r-luces.html">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Luces</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-12 search-card">
+                    <a href="r-proyector.html">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Proyectores</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-12 search-card">
+                    <a href="r-table.php">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Tablets</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-12 search-card">
+                    <a href="r-tripode.html">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Tripodes</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-12 search-card">
+                    <a href="r-mezclador.html">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Mezclador</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-12 search-card">
+                    <a href="r-microfonos.html">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Microfonos Inalámbricos</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
             <!-- Mensaje cuando no hay resultados -->
             <div id="noResults" class="alert alert-warning mt-4 hidden" role="alert">
