@@ -812,3 +812,30 @@ h3:hover{
     margin-top: 10px;
     color: #5EA617;
 }
+
+
+.btnn {
+    padding: 10px;
+    border-radius: 15px;
+  }
+  
+  .btn-successs {
+    background-color: #5EA617;
+    color: #ffffff;
+  }
+  
+  .customm-button {
+    font-size: 18px;
+    border:none;
+  }
+
+  .btnn:hover {
+    background-color: #ffffff;
+    color: #5EA617;
+
+}
+
+
+.texttext{
+    color: #5EA617;
+}
