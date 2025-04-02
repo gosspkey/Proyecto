@@ -120,23 +120,15 @@
                 </script>
             </div>
         </div>
-        <div class="text-center mt-4">
-            <button class="btn btn-success custom-button" type="submit">Guardar cambios</button>
+        <div class="btn btnn btn-successs customm-button btninicio" type="submit" style="width: 50%;">Guardar cambios</button>
         </div>
-        <br><br>
-        <div class="container">
-            <div class="row">
-                <div class="formtxt col-md-4">
-                    <a href="../vista/principal/olvidocontraseña.html">¿Olvidaste tu contraseña?</a>
-                </div>
-                <div class="formtxt">
-                    <a href="../vista/iniciosesion.html">¿Ya tienes una cuenta? <br> <strong>Iniciar sesion</strong></a>
-                </div>
-                <div class="formtxt col-md-4">
-                    <a href="#">Terminos y condiciones</a>
+        
+        <br>
+        <div class="row text-center mt-3 d-flex justify-content-center links-container">
+                <div class="formtxt col-12 col-md-4 mb-2">
+                    <a href="#" class="links d-inline-block text-center">Términos y condiciones</a>
                 </div>
             </div>
-        </div>
     </form>
 
     <footer class="mt-5 border-top">
@@ -151,6 +143,19 @@
             footer p, footer h2, footer strong {
                 color: white !important;
             }
+            .links {
+    display: block;
+    margin-top: 10px;
+    color: #68aa26;
+    text-decoration: none;
+}
+.links:hover {
+    background-color: #ddebcf;
+    color: #4b8413;
+    border-radius: 20px;
+    text-decoration: none;
+}
+            
         </style>
         <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
             <img class="footer-logo" src="../img/LOGO SENA-TECCNO.png" alt="Logo" width="600px">
@@ -169,14 +174,14 @@
                 <p> 
                     <strong>Telefono:</strong> 
                     <br> 
-                    +573222175535
+                    +573012845024
                 </p>
             </div>
             <div class="iconos ema col-md-2">
                 <p>
                     <strong>Correo:</strong>
                     <br>
-                    equipoceni@soy.sena.edu.co
+                    soportecenigraf2025@gmail.com
                 </p>
             </div>
             </div>

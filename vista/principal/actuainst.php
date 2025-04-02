@@ -8,7 +8,7 @@
     <title>TECNO-SENA</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <!--<nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="../img/logo-blanco.png" alt="Logo" width="300px" style="position: relative; left: -20px;" class="d-inline-block align-top">
@@ -28,6 +28,28 @@
             </div>
         </div>
         <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
+    </nav>
+-->
+<nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="../img/SENA-TECNO.png  " alt="Logo" width="300px" style="position: relative; left: -20px;" class="d-inline-block align-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="../principal/admin.html">inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3"href="../principal/centro de ayuda.html">Ayuda</a>
+                    </li>
+                </ul>
+            </div>
+           
+        </div>
     </nav>
 <?php
     require_once('../../modelo/instructor.php');
@@ -113,23 +135,15 @@
                 </script>
             </div>
         </div>
-        <div class="text-center mt-4">
-            <button class="btn btn-success custom-button" type="submit">Guardar cambios</button>
+        <div class="btn btnn btn-successs customm-button btninicio" type="submit" style="width: 50%;">Guardar cambios</button>
         </div>
-        <br><br>
-        <div class="container">
-            <div class="row">
-                <div class="formtxt col-md-4">
-                    <a href="../vista/principal/olvidocontraseña.html">¿Olvidaste tu contraseña?</a>
-                </div>
-                <div class="formtxt">
-                    <a href="../vista/iniciosesion.html">¿Ya tienes una cuenta? <br> <strong>Iniciar sesión</strong></a>
-                </div>
-                <div class="formtxt col-md-4">
-                    <a href="#">Términos y condiciones</a>
+        
+        <br>
+        <div class="row text-center mt-3 d-flex justify-content-center links-container">
+                <div class="formtxt col-12 col-md-4 mb-2">
+                    <a href="#" class="links d-inline-block text-center">Términos y condiciones</a>
                 </div>
             </div>
-        </div>
     </form>
 
     <footer class="mt-5 border-top">
@@ -145,8 +159,8 @@
                 color: white !important;
             }
         </style>
-       <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
-            <img class="footer-logo" src="../img/tecno sena logo blanco.PNG" alt="Logo">
+        <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
+            <img class="footer-logo" src="../img/LOGO SENA-TECCNO.png" alt="Logo" width="600px">
             <h2>Tecno-Sena</h2>
             <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
         </div>
@@ -160,20 +174,21 @@
             </div>
             <div class="iconos tel col-md-2">
                 <p> 
-                    <strong>Teléfono:</strong> 
+                    <strong>Telefono:</strong> 
                     <br> 
-                    +573222175535
+                    +573012845024
                 </p>
             </div>
             <div class="iconos ema col-md-2">
                 <p>
                     <strong>Correo:</strong>
                     <br>
-                    equipoceni@soy.sena.edu.co
+                    soportecenigraf2025@gmail.com
                 </p>
             </div>
         </div>
-        <img src="../img/sena logo blamco.png" alt="Logo" width="300px" style="position: relative; left: -100px;" class="d-inline-block align-top">
+            <div class="iconos ema col-md-2">
+    </div>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
