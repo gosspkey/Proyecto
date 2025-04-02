@@ -8,10 +8,10 @@
     <title>TECNO-SENA</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../img/logo-blanco.png" alt="Logo" width="300px" style="position: relative; left: -20px;" class="d-inline-block align-top">
+                <img src="../img/SENA-TECNO.png" alt="Logo" width="400px" style="position: relative; left: -20px;" class="d-inline-block align-top">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -19,15 +19,14 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a style="position: relative; left: 170px;" class="nav-link" href="../vista/iniciosesion.html">Inicio sesion</a>
+                        <a class="nav-link px-3" href="admin.html">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a style="position: relative; left: 170px; " class="nav-link" href="#">Ayuda</a>
+                        <a class="nav-link px-3" href="centro de ayuda.html">Centro de ayuda</a>
                     </li>
                 </ul>
             </div>
         </div>
-        <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
 
     <?php
@@ -153,8 +152,8 @@
                 color: white !important;
             }
         </style>
-       <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
-            <img class="footer-logo" src="../img/tecno sena logo blanco.PNG" alt="Logo">
+        <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
+            <img class="footer-logo" src="../img/LOGO SENA-TECCNO.png" alt="Logo" width="600px">
             <h2>Tecno-Sena</h2>
             <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
         </div>
@@ -168,7 +167,7 @@
             </div>
             <div class="iconos tel col-md-2">
                 <p> 
-                    <strong>Teléfono:</strong> 
+                    <strong>Telefono:</strong> 
                     <br> 
                     +573222175535
                 </p>
@@ -180,9 +179,11 @@
                     equipoceni@soy.sena.edu.co
                 </p>
             </div>
-        </div>
-        <img src="../img/sena logo blamco.png" alt="Logo" width="300px" style="position: relative; left: -100px;" class="d-inline-block align-top">
+            </div>
+            <div class="iconos ema col-md-2">
+    </div>
     </footer>
+       
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
