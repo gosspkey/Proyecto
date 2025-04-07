@@ -49,6 +49,6 @@ CREATE TABLE Reservas (
     CodEquipo INT,
     Fichausu VARCHAR(100) NOT NULL,
     FechaReserva TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (IDUsuario) REFERENCES Usuario(IDUsuario) ON DELETE SET NULL,
-    FOREIGN KEY (CodEquipo) REFERENCES Tabletas(CodEquipo) ON DELETE SET NULL
-);
+    FOREIGN KEY (IDUsuario) REFERENCES Usuario(IDUsuario),
+    FOREIGN KEY (CodEquipo) REFERENCES Tabletas(CodEquipo)
+	ON DELETE SET NULL);

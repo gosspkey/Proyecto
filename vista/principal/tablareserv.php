@@ -53,6 +53,7 @@ if (!$Reservas || $Reservas->rowCount()==0){
                     <th>CodEquipo</th>
                     <th>fichausu</th>
                     <th>FechaReserva</th>
+                    <th>Acciones</th>
 
                 </tr>
             </thead>";
@@ -66,7 +67,10 @@ if (!$Reservas || $Reservas->rowCount()==0){
                     <td data-label='fichausu'>".$f["Fichausu"]. "</td>
                     <td data-label='FechaReserva'>".$f["FechaReserva"]. "
                     
-                    </td>
+                    <td>
+            <a href='../../controlador/cancelarreser.php?id=".$f["IDReserva"]."' class='custom-button'>Cancelar</a>
+            <a href='../../controlador/eliminarequipo.php?codigo=".$f["CodEquipo"]."' class='custom-button'>Eliminar Equipo</a>
+        </td>
 
 
             </tr>";

@@ -45,19 +45,12 @@ class Reservas {
         return $consulta;
     }
 
-    public function eliminarEquipo() {
-        $query = "DELETE FROM Tabletas WHERE CodEquipo = :CodEquipo";
+    public function eliminarReserva($idReserva) {
+        $query = "DELETE FROM reservas WHERE IDReserva = :idReserva";
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':idReserva', $idReserva, PDO::PARAM_INT);
     
-        $stmt->bindParam(':CodEquipo', $this->CodEquipo);
-    
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            $errorInfo = $stmt->errorInfo();
-            echo "Error al eliminar el equipo: " . $errorInfo[2];
-            return false;
-        }
+        return $stmt->execute();
     }
     
     

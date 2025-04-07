@@ -78,19 +78,12 @@ class Tabletas {
         return $consulta;
     }
 
-    public function eliminarEquipo() {
-        $query = "DELETE FROM " . $this->table . " WHERE CodEquipo = :CodEquipo";
+    public function eliminarEquipo($codigoEquipo) {
+        $query = "DELETE FROM Tabletas WHERE CodEquipo = :codigoEquipo";
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':codigoEquipo', $codigoEquipo, PDO::PARAM_STR);
     
-        $stmt->bindParam(':CodEquipo', $this->id);
-    
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            $errorInfo = $stmt->errorInfo();
-            echo "Error al eliminar el equipo: " . $errorInfo[2];
-            return false;
-        }
+        return $stmt->execute();
     }
     
     

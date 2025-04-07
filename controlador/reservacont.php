@@ -16,45 +16,39 @@ if (!isset($_SESSION['id'])) {
     exit;
 }
 
-echo "ID del usuario en sesión: " . $_SESSION['id']; // Depuración para verificar el ID del usuario
+$idUsuario = $_SESSION['id']; // ID del usuario desde la sesión
+echo "ID del usuario en sesión: " . $idUsuario; // Depuración para verificar el ID del usuario
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_SESSION['id']; // ID del usuario desde la sesión
     $CodEquipo = $_POST['CodEquipo'] ?? null; // Código de la tableta seleccionada
     $Fichausu = $_POST['fichausu'] ?? null; // Ficha del usuario
     $FechaReserva = $_POST['FechaReserva'] ?? null; // Fecha de la reserva
 
     // Validar que los datos requeridos estén presentes
-    if (!$id || !$CodEquipo || !$Fichausu || !$FechaReserva) {
+    if (!$idUsuario || !$CodEquipo || !$Fichausu || !$FechaReserva) {
         echo "Faltan datos para realizar la reserva.";
         exit;
     }
 
-    // Crear una instancia de la clase Reservas
-    $reserva = new Reservas($db);
-    $reserva->IDUsuario = $id;
-    $reserva->CodEquipo = $CodEquipo;
-    $reserva->fichausu = $Fichausu;
-    $reserva->FechaReserva = $FechaReserva;
+    // Crear la reserva
+    $query = "INSERT INTO Reservas (IDUsuario, CodEquipo, Fichausu, FechaReserva) VALUES (:idUsuario, :CodEquipo, :Fichausu, :FechaReserva)";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':idUsuario', $idUsuario);
+    $stmt->bindParam(':CodEquipo', $CodEquipo);
+    $stmt->bindParam(':Fichausu', $Fichausu);
+    $stmt->bindParam(':FechaReserva', $FechaReserva);
 
-    var_dump($reserva);
+    if ($stmt->execute()) {
+        // Obtener el ID de la reserva recién creada
+        $idReserva = $db->lastInsertId();
 
-// Crear la reserva
-if ($reserva->crearReserva()) {
-    echo "Reserva registrada correctamente.<br>";
-
-    // Eliminar la tableta de la base de datos
-    if ($reserva->eliminarEquipo()) {
-        echo "Tableta eliminada correctamente de la base de datos.<br>";
+        // Redirigir al usuario después de la reserva
+        header("Location: ../vista/principal/reservaexitosa.php?id=$idReserva");
+        exit;
     } else {
-        echo "Error al eliminar la tableta.<br>";
+        echo "Error al registrar la reserva.";
     }
-
-    // Redirigir al usuario después de la reserva
-    header("Location: ../vista/principal/r-table.php");
-    exit;
 } else {
-    echo "Error al registrar la reserva.";
-}
+    echo "Método no permitido.";
 }
 ?>
