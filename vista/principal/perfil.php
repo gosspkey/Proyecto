@@ -89,6 +89,9 @@ if (isset($_SESSION['id'])) {
 } else {
     echo "No has iniciado sesión. Por favor, ingresa.";
 }
+
+echo "<a href='actuacontrase.php'?id=" . htmlspecialchars($_SESSION['id']) . "' class='btn btn-success custom-button'>Cambia tu contraseña</a>";
+
 ?>
 
 <footer class="mt-5 border-top">
