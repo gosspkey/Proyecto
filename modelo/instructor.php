@@ -86,7 +86,7 @@ class Instructores {
 }
 
 // Procesamiento del formulario de registro
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['registrar'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $database = new Database();
     $conn = $database->getConnection();
     $instructorObj = new Instructores($conn);
