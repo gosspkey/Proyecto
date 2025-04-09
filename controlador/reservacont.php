@@ -2,7 +2,8 @@
 require_once('../confi/conexion.php');
 require_once('../modelo/reservas.php');
 require_once('../modelo/tabletas.php');
-require_once('../modelo/usuario.php');
+require_once('../controlador/usuariocont.php');
+
 
 session_start(); // Iniciar la sesión
 

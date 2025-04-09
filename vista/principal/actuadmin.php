@@ -29,109 +29,124 @@
         </div>
     </nav>
 
-    <?php
-    require_once('../../modelo/usuario.php');
-    require_once('../../confi/conexion.php');
-    $database = new Database();
-    $db = $database->getConnection();
-    $usuario = new Usuario($db);
+<?php
+require_once '../../confi/conexion.php';
+require_once '../../modelo/usuario.php';
 
-    if(isset($_GET['id'])){
-        $id = $_GET['id'];
-        $usuario->id = $id;
-        $data = $usuario->Usuuno();
-        $fila = $data->fetch(PDO::FETCH_ASSOC);
-    }
+$database = new Database();
+$conn = $database->getConnection();
+$usuarioObj = new Usuario($conn);
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $usuario->id = $_POST['IDUsuario'];
-        $usuario->nombre = $_POST['nombre'];
-        $usuario->apellido = $_POST['apellido'];
-        $usuario->identi = $_POST['identi'];
-        $usuario->documento = $_POST['documento'];
-        $usuario->telefono = $_POST['telefono'];
-        $usuario->email = $_POST['correo'];
-        $usuario->ficha = $_POST['ficha'];
-        $usuario->usuario = $_POST['usuario'];
-        $usuario->rol = $_POST['rol'];
-        $usuario->contra = $_POST['contraseña'];
+// Verificar si hay un ID para editar
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
 
-        if ($usuario->actualizar()) {
-            echo "Usuario actualizado correctamente.";
-        } else {
-            echo "Error al actualizar el usuario.";
+    // Obtener los datos del usuario
+    $stmt = $usuarioObj->listarusu();
+    $usuarioData = null;
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        if ($row['Idusu'] == $id) {
+            $usuarioData = $row;
+            break;
         }
     }
-    ?>
 
-    <form action="actuadmin.php?id=<?php echo $usuario->id; ?>" method="POST" class="container">
-        <input type="hidden" name="IDUsuario" value="<?php echo $fila['IDUsuario']; ?>">
-        <h2 class="titulo text-center"> <strong>Actualizar Usuario</strong></h2>
-        <div class="row">
-            <div class="container mt-5 col-md-6 form1 form-group">
-                <label for="nombre" class="mr-2">Nombre(s):</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
+    if (!$usuarioData) {
+        echo "Usuario no encontrado.";
+        exit();
+    }
+}
 
-                <label for="apellido" class="mr-2">Apellidos:</label>
-                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingrese sus apellidos" required>
+// Si se envía el formulario, actualizar el usuario
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $usuarioObj->id = $_POST['id'];
+    $usuarioObj->nombre = $_POST['nombre'];
+    $usuarioObj->apellido = $_POST['apellido'];
+    $usuarioObj->identi = $_POST['identi'];
+    $usuarioObj->documento = $_POST['documento'];
+    $usuarioObj->email = $_POST['correo'];
+    $usuarioObj->telefono = $_POST['telefono'];
+    $usuarioObj->usuario = $_POST['usuario'];
+    $usuarioObj->ficha = $_POST['ficha'];
+    $usuarioObj->contra = $_POST['contraseña']; // El método ya lo hashea
 
-                <label for="identi" class="mr-2">Tipo de documento:</label>
-                <select name="identi" id="identi" class="form-control">
-                    <option value="C.C">C.C</option>
-                    <option value="T.I">T.I</option>
-                    <option value="C.E">C.E</option>
-                    <option value="P.P.T">P.P.T</option>
-                </select>
+    $resultado = $usuarioObj->actualizar();
 
-                <label for="documento" class="mr-2">Numero de documento:</label>
-                <input type="text" class="form-control" name="documento" id="documento" placeholder="Ingrese su numero del documento" required>
+    if ($resultado) {
+        header("Location: tablaestu.php");
+        exit;
+    } else {
+        echo "Error al actualizar.";
+    }
+}
+?>
 
-                <label for="telefono" class="mr-2">Telefono:</label>
-                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Ingrese numero de contacto" required>
-                
-                <label for="correo" class="mr-2">Correo electronico:</label>
-                <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese correo" required>
-            </div>
+<form method="POST" action="actuadmin.php" method="POST" class="container">
+    <input type="hidden" name="id" value="<?= $usuarioData['Idusu'] ?>">
+    <h2 class="titulo text-center"> <strong>Actualizar Usuario</strong></h2>
+    <div class="row">
+        <div class="container mt-5 col-md-6 form1 form-group">
+        <label for="nombre" class="mr-2">Nombre(s):</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $usuarioData['Nombreusu'] ?>" required>
 
-            <div class="container mt-5 col-md-6 form1 form-group">
-                <label for="ficha" class="mr-2">Ficha:</label>
-                <input type="text" class="form-control" name="ficha" id="ficha" placeholder="Ingrese una ficha" required>
+        <label for="apellido" class="mr-2">Apellidos:</label>
+        <input type="text" class="form-control" id="apellido" name="apellido" value="<?= $usuarioData['Apellidousu'] ?>" required>
 
-                <label for="usuario" class="mr-2">Nombre de usuario:</label>
-                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingrese un usuario" required>
+        <label>Identificación:</label>
+        <select type="text" class="form-control" id="identi" name="identi" value="<?= $usuarioData['Identificacionusu'] ?>" required>
+            <option value="">Tipo de documento</option>
+                <option value="C.C">C.C</option>
+                <option value="T.I">T.I</option>
+                <option value="C.E">C.E</option>
+                <option value="P.P.T">P.P.T
+            </option>
+        </select>
 
-                <label for="rol" class="mr-2">Rol:</label>
-                <select name="rol" id="rol" class="form-control">
-                    <option value="Administrador">Administrador</option>
-                    <option value="Estudiante">Estudiante</option>
-                </select>
+        <label for="documento" class="mr-2">Numero de documento:</label>
+        <input type="text"class="form-control" id="documento" name="documento" value="<?= $usuarioData['Documentousu'] ?>" required>
 
-                <label for="contraseña" class="mr-2">Contraseña:</label>
-                <input type="password" class="form-control" name="contraseña" id="contraseña" placeholder="Ingrese su contraseña" required>
-                <span class="vercontra" onclick="vercontra('contraseña', this)">👁️‍🗨️</span>
-                <script>
-                    function vercontra(id, element) {
-                        const passwordInput = document.getElementById(id);
-                        const passwordType = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                        passwordInput.setAttribute('type', passwordType);
-                        // Cambiar el símbolo de la lectura de la contraseña
-                        element.textContent = passwordType === 'password' ? '👁️‍🗨️' : '👀';
-                    }
-                </script>
-            </div>
+        <label for="telefono" class="mr-2">Telefono:</label>
+        <input type="text" class="form-control" id="telefono" name="telefono" value="<?= $usuarioData['Telefonousu'] ?>" required>
+    </div>
+
+    <div class="container mt-5 col-md-6 form1 form-group">
+
+        <label for="correo" class="mr-2">Correo electronico:</label>
+        <input type="email" class="form-control" id="correo" name="correo" value="<?= $usuarioData['Emailusu'] ?>" required>
+
+        <label for="ficha" class="mr-2">Ficha:</label>
+        <input type="text" class="form-control" id="ficha" name="ficha" value="<?= $usuarioData['Fichausu'] ?>" required>
+
+        <label>Usuario:</label>
+        <input type="text" class="form-control" id="usuario" name="usuario" value="<?= $usuarioData['Usuario'] ?>" required>
+
+        <label for="contraseña" class="mr-2">Contraseña:</label>
+        <input type="password" class="form-control" id="contraseña" name="contraseña" required>
+
+        <span class="vercontra" onclick="vercontra('contraseña', this)">👁️‍🗨️</span>
+        <script>
+            function vercontra(id, element) {
+                const passwordInput = document.getElementById(id);
+                const passwordType = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', passwordType);
+                // Cambiar el símbolo de la lectura de la contraseña
+                element.textContent = passwordType === 'password' ? '👁️‍🗨️' : '👀';
+            }
+        </script>
+    </div>
+    <div class="text-center mt-4">
+        <button class="btn btnn btn-successs customm-button btninicio" type="submit">Actualizar</button>
+    </div>
+    <div class="row text-center mt-3 d-flex justify-content-center links-container">
+        <div class="formtxt col-12 col-md-4 mb-2">
+            <a href="#" class="links d-inline-block text-center">Términos y condiciones</a>
         </div>
-        <div class="btn btnn btn-successs customm-button btninicio" type="submit" style="width: 50%;">Guardar cambios</button>
-        </div>
+    </div>
+
         
-        <br>
-        <div class="row text-center mt-3 d-flex justify-content-center links-container">
-                <div class="formtxt col-12 col-md-4 mb-2">
-                    <a href="#" class="links d-inline-block text-center">Términos y condiciones</a>
-                </div>
-            </div>
-    </form>
+</form>
 
-    <footer class="mt-5 border-top">
+<footer class="mt-5 border-top">
         <style>
             footer {
                 background-color: #5EA617;
@@ -195,42 +210,3 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-<?php
-require_once('../../modelo/usuario.php');
-require_once('../../confi/conexion.php');
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $database = new Database();
-    $db = $database->getConnection();
-    $usuario = new Usuario($db);
-
-    $usuario->id = $_POST['IDUsuario'];
-    $usuario->nombre = $_POST['nombre'];
-    $usuario->apellido = $_POST['apellido'];
-    $usuario->identi = $_POST['identi'];
-    $usuario->documento = $_POST['documento'];
-    $usuario->telefono = $_POST['telefono'];
-    $usuario->email = $_POST['correo'];
-    $usuario->ficha = $_POST['ficha'];
-    $usuario->usuario = $_POST['usuario'];
-    $usuario->rol = $_POST['rol'];
-    
-    // Solo encriptamos la contraseña si ha sido cambiada
-    if (!empty($_POST['contraseña'])) {
-        $usuario->contra = password_hash($_POST['contraseña'], PASSWORD_BCRYPT);
-    } else {
-        // Mantenemos la contraseña existente si no se ha cambiado
-        $data = $usuario->Usuuno();
-        $fila = $data->fetch(PDO::FETCH_ASSOC);
-        $usuario->contra = $fila['Contraseña'];
-    }
-
-    if ($usuario->actualizar()) {
-        echo "Usuario actualizado correctamente.";
-    } else {
-        echo "Error al actualizar el usuario.";
-    }
-}
-?>

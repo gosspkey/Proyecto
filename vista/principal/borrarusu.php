@@ -44,7 +44,7 @@ $id_a_borrar = $_GET['id'];
 if (filter_var($id_a_borrar, FILTER_VALIDATE_INT)) {
     try {
         
-        $query = "DELETE FROM Usuario WHERE IDUsuario = :id";
+        $query = "DELETE FROM Usuario WHERE Idusu = :id";
         
 
         $stmt = $conexion->prepare($query);

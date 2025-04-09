@@ -33,7 +33,7 @@
            
         </div>
     </nav>
-    <form action="../controlador/usuariocont.php" method="POST" class="container">
+    <form action="../modelo/usuario.php" method="POST" class="container">
         <h2 class="titulo text-center"> <strong>Registro</strong></h2>
         <div class="row">
             <div class="container mt-5 col-md-6 form1 form-group">
@@ -67,12 +67,6 @@
 
                 <label for="usuario" class="mr-2">Nombre de usuario:</label>
                 <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingrese un usuario" required>
-
-                <label for="rol" class="mr-2">Rol:</label>
-                <select name="rol" id="rol" class="form-control">
-                    <option value="Administrador">Administrador</option>
-                    <option value="Estudiante">Aprendiz</option>
-                </select>
 
                 <label for="contraseña" class="mr-2">Contraseña:</label>
                 <input type="password" class="form-control" name="contraseña" id="contraseña" placeholder="Ingrese su contraseña" required>

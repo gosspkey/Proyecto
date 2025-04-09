@@ -44,7 +44,7 @@ $id_a_borrar = $_GET['id'];
 if (filter_var($id_a_borrar, FILTER_VALIDATE_INT)) {
     try {
         
-        $query = "DELETE FROM Instructores WHERE IDinstructor = :id";
+        $query = "DELETE FROM Instructores WHERE Idins = :id";
         
 
         $stmt = $conexion->prepare($query);

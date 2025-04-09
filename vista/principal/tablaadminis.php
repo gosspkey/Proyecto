@@ -28,66 +28,59 @@
         <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
 
-    <?php
-    require_once('../../modelo/instructor.php');
-    require_once('../../confi/conexion.php');
-    $database = new Database();
-    $db = $database->getConnection();
-    $Instructores= new Instructores($db);
-    $ins = $Instructores->listarins();
+<?php
+require_once('../../modelo/administrador.php'); // Verifica que el archivo existe y está bien escrito
+require_once('../../confi/conexion.php');
 
-    if (!$ins || $ins->rowCount()==0){
-        echo "No hay usuarios registrados";
-    }else
-    {
+// Crear conexión
+$database = new Database();
+$db = $database->getConnection();
 
+// ⚠️ Verifica que la clase se llame exactamente así en administrador.php
+$Administrador = new Administrador($db); // Usa "Administrador" si esa es la clase (singular)
+$adm = $Administrador->listaradmin(); // Corrige nombre de variable
 
-            echo "<h1>Instructores</h1>";
-            echo "<link rel='stylesheet' href='../css/style.css'>";
-            echo "<table class = 'custom-table'>";
-            echo "<thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Tipo de identificacion</th>
-                        <th>Documento</th>
-                        <th>Email</th>
-                        <th>Usuario</th>
-                        <th>Contraseña</th>
-
-                    </tr>
-                </thead>";
-
-                while($f = $ins->fetch(PDO::FETCH_ASSOC)){
-
-                echo "<tr>
-                        <td>".$f["Idins"]. "</td>
-                        <td>".$f["Nombreins"]. "</td>
-                        <td>".$f["Apellidoins"]. "</td>
-                        <td>".$f["Identificacionins"]. "</td>
-                        <td>".$f["Documentoins"]. "</td>
-                        <td>".$f["Emailins"]. "</td>
-                        <td>".$f["Usuario"]. "</td>
-                        <td>".$f["Contraseña"]. "</td>
-                        <td>
-
-                        <a href='actuainst.php?id=" . $f["Idins"] . "' class='custom-button'>Actualizar</a>
-                        <a href='borrarinstu.php?id=" . $f["Idins"] . "' class='custom-button'>Borrar</a>
-
-            
-
-                        </td>
-
-
-                </tr>";
-
-                }
-
-                echo "</table>";
+if (!$adm || $adm->rowCount() == 0){
+    echo "No hay administradores registrados.";
+} else {
+    echo "<h1>Administradores</h1>";
+    echo "<link rel='stylesheet' href='../css/style.css'>";
+    echo "<table class='custom-table'>";
+    echo "<thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Tipo de identificación</th>
+                <th>Documento</th>
+                <th>Email</th>
+                <th>Usuario</th>
+                <th>Contraseña</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>";
+    
+    while ($f = $adm->fetch(PDO::FETCH_ASSOC)) {
+        echo "<tr>
+                <td>{$f["Idad"]}</td>
+                <td>{$f["Nombread"]}</td>
+                <td>{$f["Apellidoad"]}</td>
+                <td>{$f["Identificacionad"]}</td>
+                <td>{$f["Documentoad"]}</td>
+                <td>{$f["Emailad"]}</td>
+                <td>{$f["Usuario"]}</td>
+                <td>{$f["Contraseña"]}</td>
+                <td>
+                    <a href='actualadadmin.php?id={$f["Idad"]}' class='custom-button'>Actualizar</a>
+                    <a href='borraradmin.php?id={$f["Idad"]}' class='custom-button'>Borrar</a>
+                </td>
+            </tr>";
     }
-            
-    ?>
+
+    echo "</table>";
+}
+?>
+
 
 <footer class="mt-5 border-top">
     <style>

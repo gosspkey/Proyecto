@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css"> 
-    <title>TECNO-SENA</title>
+    <title>Eliminar Usuario</title>
 </head>
+
 <body>
 <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
@@ -19,6 +21,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
+                        <a style="position: relative; left: 170px;" class="nav-link" href="../Proyecto/vista/registro.html">Registrarse</a>
+                    </li>
+                    <li class="nav-item">
                         <a style="position: relative; left: 170px; " class="nav-link" href="#">Ayuda</a>
                     </li>
                 </ul>
@@ -27,68 +32,45 @@
         </div>
         <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
-
-    <?php
-    require_once('../../modelo/instructor.php');
-    require_once('../../confi/conexion.php');
-    $database = new Database();
-    $db = $database->getConnection();
-    $Instructores= new Instructores($db);
-    $ins = $Instructores->listarins();
-
-    if (!$ins || $ins->rowCount()==0){
-        echo "No hay usuarios registrados";
-    }else
-    {
+<?php
+include ('../../confi/conexion.php'); 
+$database = new Database();
+$conexion = $database->getConnection(); 
 
 
-            echo "<h1>Instructores</h1>";
-            echo "<link rel='stylesheet' href='../css/style.css'>";
-            echo "<table class = 'custom-table'>";
-            echo "<thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Tipo de identificacion</th>
-                        <th>Documento</th>
-                        <th>Email</th>
-                        <th>Usuario</th>
-                        <th>Contraseña</th>
-
-                    </tr>
-                </thead>";
-
-                while($f = $ins->fetch(PDO::FETCH_ASSOC)){
-
-                echo "<tr>
-                        <td>".$f["Idins"]. "</td>
-                        <td>".$f["Nombreins"]. "</td>
-                        <td>".$f["Apellidoins"]. "</td>
-                        <td>".$f["Identificacionins"]. "</td>
-                        <td>".$f["Documentoins"]. "</td>
-                        <td>".$f["Emailins"]. "</td>
-                        <td>".$f["Usuario"]. "</td>
-                        <td>".$f["Contraseña"]. "</td>
-                        <td>
-
-                        <a href='actuainst.php?id=" . $f["Idins"] . "' class='custom-button'>Actualizar</a>
-                        <a href='borrarinstu.php?id=" . $f["Idins"] . "' class='custom-button'>Borrar</a>
-
-            
-
-                        </td>
+$id_a_borrar = $_GET['id'];
 
 
-                </tr>";
+if (filter_var($id_a_borrar, FILTER_VALIDATE_INT)) {
+    try {
+        
+        $query = "DELETE FROM Administradores WHERE Idad = :id";
+        
 
-                }
+        $stmt = $conexion->prepare($query);
+        
+        
+        $stmt->bindParam(':id', $id_a_borrar);
 
-                echo "</table>";
+        
+        if ($stmt->execute()) {
+     
+            if ($stmt->rowCount() > 0) {
+                echo "<p>Usuario borrado correctamente</p>";
+            } else {
+                echo "<p>No se encontró el usuario</p>";
+            }
+        } else {
+            echo "<p>Error al borrar el usuario</p>";
+        }
+    } catch (PDOException $e) {
+        
+        echo "<p>Error al ejecutar la consulta: " . $e->getMessage() . "</p>";
     }
-            
-    ?>
-
+} else {
+    echo "<p>ID no válido.</p>";
+}
+?>
 <footer class="mt-5 border-top">
     <style>
         footer {
@@ -102,7 +84,7 @@
             color: white !important;
         }
     </style>
-   <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
+    <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
             <img class="footer-logo" src="../img/tecno sena logo blanco.PNG" alt="Logo">
             <h2>Tecno-Sena</h2>
             <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
@@ -117,7 +99,7 @@
             </div>
             <div class="iconos tel col-md-2">
                 <p> 
-                    <strong>Telefono:</strong> 
+                    <strong>Teléfono:</strong> 
                     <br> 
                     +573222175535
                 </p>
@@ -133,10 +115,8 @@
         <img src="../img/sena logo blamco.png" alt="Logo" width="300px" style="position: relative; left: -100px;" class="d-inline-block align-top">
     </footer>
 
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-

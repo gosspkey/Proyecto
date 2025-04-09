@@ -1,158 +1,111 @@
 <?php
+require_once(__DIR__ . '/../confi/conexion.php');
+
 class Instructores {
     private $conn;
     private $table = "Instructores";
     public $id;
-    public $nombrein;
-    public $apellidoin;
-    public $identiin;
-    public $documentoin;
-    public $emailin;
-    public $usuarioin;
-    public $contrain;
+    public $nombre;
+    public $apellido;
+    public $identi;
+    public $documento;
+    public $email;
+    public $usuario;
+    public $contra;
 
-    // Constructor para inicializar la conexión
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    public function actualizarins() {
-        $query = "UPDATE " . $this->table . " 
-                  SET Nombrein = :nombrein, Apellidoin = :apellidoin, Identificacionin = :identiin, 
-                      Documentoin = :documentoin, Emailin = :emailin, Usuarioin = :usuarioin, 
-                      Contraseñain = :contrain 
-                  WHERE IDinstructor = :id";
-        
-        $res = $this->conn->prepare($query);
-    
-        // Limpiar datos
-        $this->nombrein = htmlspecialchars(strip_tags($this->nombrein));
-        $this->apellidoin = htmlspecialchars(strip_tags($this->apellidoin));
-        $this->identiin = htmlspecialchars(strip_tags($this->identiin));
-        $this->documentoin = htmlspecialchars(strip_tags($this->documentoin));
-        $this->emailin = htmlspecialchars(strip_tags($this->emailin));
-        $this->usuarioin = htmlspecialchars(strip_tags($this->usuarioin));
-        $this->contrain = password_hash($this->contrain, PASSWORD_BCRYPT);
-        $this->id = htmlspecialchars(strip_tags($this->id));
-    
-        // Vincular parámetros
-        $res->bindParam(':nombrein', $this->nombrein);
-        $res->bindParam(':apellidoin', $this->apellidoin);
-        $res->bindParam(':identiin', $this->identiin);
-        $res->bindParam(':documentoin', $this->documentoin);
-        $res->bindParam(':emailin', $this->emailin);
-        $res->bindParam(':usuarioin', $this->usuarioin);
-        $res->bindParam(':contrain', $this->contrain);
-        $res->bindParam(':id', $this->id);
-    
-        // Ejecutar la consulta
-        if ($res->execute()) {
-            echo "Instructor actualizado exitosamente.";
-            return true;
-        } else {
-            // Manejo de errores
-            $errorInfo = $res->errorInfo();
-            echo "Error al actualizar el instructor: " . $errorInfo[2];
-            return false;
-        }
-    }
-    public function idisns() {
-        $query = "SELECT * FROM " . $this->table . " WHERE IDinstructor = :id LIMIT 1";
-        $stmt = $this->conn->prepare($query);
-    
-        // Limpiar datos
-        $this->id = htmlspecialchars(strip_tags($this->id));
-    
-        // Vincular el parámetro ID
-        $stmt->bindParam(':id', $this->id);
-    
-        // Ejecutar la consulta
-        if ($stmt->execute()) {
-            // Verificar si se encontró un registro
-            if ($stmt->rowCount() > 0) {
-                return $stmt->fetch(PDO::FETCH_ASSOC); // Retorna un arreglo asociativo con los datos
-            } else {
-                echo "No se encontró el instructor con el ID proporcionado.";
-                return false;
-            }
-        } else {
-            // Manejo de errores
-            $errorInfo = $stmt->errorInfo();
-            echo "Error al ejecutar la consulta: " . $errorInfo[2];
-            return false;
-        }
-    }
-    
-
-    public function registrarinstru() {
-        echo "Intentando registrar instructor...<br>";
-        if ($this->validarins()) {
-            echo "Error: el usuario ya existe";
-            return false;
-        }
-    
-        $query = "INSERT INTO " . $this->table . " (Nombrein, Apellidoin, Identificacionin, Documentoin, Emailin, Usuarioin, Contraseñain) 
-        VALUES (:nombrein, :apellidoin, :identiin, :documentoin, :emailin, :usuarioin, :contrain)";
-    
-        $res = $this->conn->prepare($query);
-    
-        $this->nombrein = htmlspecialchars(strip_tags($this->nombrein));
-        $this->apellidoin = htmlspecialchars(strip_tags($this->apellidoin));
-        $this->identiin = htmlspecialchars(strip_tags($this->identiin));
-        $this->documentoin = htmlspecialchars(strip_tags($this->documentoin));
-        $this->emailin = htmlspecialchars(strip_tags($this->emailin));
-        $this->usuarioin = htmlspecialchars(strip_tags($this->usuarioin));
-        $this->contrain = password_hash($this->contrain, PASSWORD_BCRYPT);
-    
-        // Vincular parámetros
-        $res->bindParam(':nombrein', $this->nombrein);
-        $res->bindParam(':apellidoin', $this->apellidoin);
-        $res->bindParam(':identiin', $this->identiin);
-        $res->bindParam(':documentoin', $this->documentoin);
-        $res->bindParam(':emailin', $this->emailin);
-        $res->bindParam(':usuarioin', $this->usuarioin);
-        $res->bindParam(':contrain', $this->contrain);
-    
-        // Ejecutar la consulta
-        if ($res->execute()) {
-            echo "Instructor registrado exitosamente.";
-            return true;
-        } else {
-            // Manejo de errores
-            $errorInfo = $res->errorInfo();
-            echo "Error al ejecutar la consulta: " . $errorInfo[2];
-            return false;
-        }
-    }
-    
-
-    // Verificar si existe el email o el nombre de usuario
-    public function validarins() {
-        // Crear la consulta de búsqueda
-        $query = "SELECT IDinstructor FROM " . $this->table . " WHERE Emailin=:emailin OR Usuarioin=:usuarioin LIMIT 1";
-    
-        // Resultado de la creación
-        $consulta = $this->conn->prepare($query);
-    
-        // Encriptación
-        $this->emailin = htmlspecialchars(strip_tags($this->emailin));
-        $this->usuarioin = htmlspecialchars(strip_tags($this->usuarioin));
-    
-        // Resultado conexión
-        $consulta->bindParam(':emailin', $this->emailin);
-        $consulta->bindParam(':usuarioin', $this->usuarioin);
-    
-        $consulta->execute();
-    
-        return $consulta->rowCount() > 0;
-    }
-
-    // Función para listar los usuarios registrados
+    // Listar instructores
     public function listarins() {
         $query = "SELECT * FROM " . $this->table;
-        $consulta = $this->conn->prepare($query);
-        $consulta->execute();
-        return $consulta;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    // Obtener un instructor por ID
+    public function idisns() {
+        $query = "SELECT * FROM instructores WHERE Idins = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->id);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    // Actualizar instructor desde formulario actuainst.php
+    public function actualizarins() {
+        $query = "UPDATE " . $this->table . " SET 
+            Nombreins = :nombre,
+            Apellidoins = :apellido,
+            Identificacionins = :identi,
+            Documentoins = :documento,
+            Emailins = :email,
+            Usuario = :usuario,
+            Contraseña = :contra
+            WHERE Idins = :id";
+
+        $stmt = $this->conn->prepare($query);
+
+        // Hashear la contraseña
+        $contraHash = password_hash($this->contra, PASSWORD_BCRYPT);
+
+        // Enlazar parámetros
+        $stmt->bindParam(':nombre', $this->nombre);
+        $stmt->bindParam(':apellido', $this->apellido);
+        $stmt->bindParam(':identi', $this->identi);
+        $stmt->bindParam(':documento', $this->documento);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':usuario', $this->usuario);
+        $stmt->bindParam(':contra', $contraHash);
+        $stmt->bindParam(':id', $this->id);
+
+        return $stmt->execute();
+    }
+
+    // Método original para registrar instructor
+    public function registrar($nombre, $apellido, $identificacion, $documento, $email, $usuario, $contraseña) {
+        // Verificar duplicados
+        $sql = "SELECT * FROM Instructores WHERE Usuario = ? OR Documentoins = ? OR Emailins = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$usuario, $documento, $email]);
+
+        if ($stmt->rowCount() > 0) {
+            return "Ya existe un instructor con el mismo nombre de usuario, documento o correo.";
+        }
+
+        // Insertar nuevo instructor
+        $sql = "INSERT INTO Instructores (Nombreins, Apellidoins, Identificacionins, Documentoins, Emailins, Usuario, Contraseña)
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$nombre, $apellido, $identificacion, $documento, $email, $usuario, $contraseña]);
+
+        return "Instructor registrado con éxito.";
+    }
+}
+
+// Procesamiento del formulario de registro
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['registrar'])) {
+    $database = new Database();
+    $conn = $database->getConnection();
+    $instructorObj = new Instructores($conn);
+
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $identi = $_POST['identi'];
+    $documento = $_POST['documento'];
+    $correo = $_POST['correo'];
+    $usuario = $_POST['usuario'];
+    $contraseña = password_hash($_POST['contraseña'], PASSWORD_BCRYPT);
+
+    $resultado = $instructorObj->registrar($nombre, $apellido, $identi, $documento, $correo, $usuario, $contraseña);
+
+    if (str_starts_with($resultado, "")) {
+        header("Location: ../vista/iniciosesion.html");
+        exit();
+    } else {
+        echo $resultado;
     }
 }
 ?>

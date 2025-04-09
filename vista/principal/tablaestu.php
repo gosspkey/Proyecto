@@ -66,21 +66,20 @@ if (!$usu || $usu->rowCount()==0){
              while($f = $usu->fetch(PDO::FETCH_ASSOC)){
 
                echo "<tr>
-                    <td data-label='ID'>".$f["IDUsuario"]. "</td>
-                    <td data-label='Nombre'>".$f["Nombre"]. "</td>
-                    <td data-label='Apellido'>".$f["Apellido"]. "</td>
-                    <td data-label='Tipo de identificacion'>".$f["Identificacion"]. "</td>
-                    <td data-label='Documento'>".$f["Documento"]. "</td>
-                    <td data-label='Telefono'>".$f["Telefono"]. "</td>
-                    <td data-label='Email'>".$f["Email"]. "</td>
-                    <td data-label='Ficha'>".$f["Ficha"]. "</td>
+                    <td data-label='ID'>".$f["Idusu"]. "</td>
+                    <td data-label='Nombre'>".$f["Nombreusu"]. "</td>
+                    <td data-label='Apellido'>".$f["Apellidousu"]. "</td>
+                    <td data-label='Tipo de identificacion'>".$f["Identificacionusu"]. "</td>
+                    <td data-label='Documento'>".$f["Documentousu"]. "</td>
+                    <td data-label='Telefono'>".$f["Telefonousu"]. "</td>
+                    <td data-label='Email'>".$f["Emailusu"]. "</td>
+                    <td data-label='Ficha'>".$f["Fichausu"]. "</td>
                     <td data-label='Usuario'>".$f["Usuario"]. "</td>
-                    <td data-label='Rol'>".$f["Rol"]. "</td>
                     <td data-label='Contraseña'>".$f["Contraseña"]. "</td>
                     <td>
 
-                    <a href='actuadmin.php?id=" . $f["IDUsuario"] . "' class='custom-button'>Actualizar</a>
-                    <a href='borrarusu.php?id=" . $f["IDUsuario"] . "' class='custom-button'>Borrar</a>
+                    <a href='actuadmin.php?id=" . $f["Idusu"] . "' class='custom-button'>Actualizar</a>
+                    <a href='borrarusu.php?id=" . $f["Idusu"] . "' class='custom-button'>Borrar</a>
 
          
 
