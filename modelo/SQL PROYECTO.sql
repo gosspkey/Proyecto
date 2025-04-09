@@ -1,32 +1,42 @@
 create database proyecto;
 use proyecto;
 
-create table Usuario(
-IDUsuario int primary key auto_increment not null,
-Nombre varchar (100) not null,
-Apellido varchar(100) not null,
-Identificacion enum('C.C','T.I','C.E','P.P.T') NOT NULL,
-Documento varchar(100) not null,
-Telefono varchar(100) not null,
-Email varchar(100) not null,
-Ficha varchar(100) not null,
-Usuario  varchar(100) not null,
-Rol enum ('Estudiante','Administrador') not null,
-Contraseña  varchar(100) not null
+CREATE TABLE Usuario (
+    Idusu int primary key auto_increment not null,
+    Nombreusu VARCHAR(50) NOT NULL,
+    Apellidousu varchar(100) NOT NULL,
+    Usuario  varchar(100) NOT NULL,
+    Identificacionusu enum('C.C','T.I','C.E','P.P.T') NOT NULL,
+	Documentousu varchar(100) NOT NULL,
+	Telefonousu varchar(100) NOT NULL,
+	Emailusu varchar(100) NOT NULL,
+	Fichausu varchar(100) NOT NULL,
+    Contraseña VARCHAR(255) NOT NULL
 );
 describe Usuario;
 
-create table Instructores(
-IDinstructor int primary key auto_increment not null,
-Nombrein varchar (100) not null,
-Apellidoin varchar(100) not null,
-Identificacionin enum('C.C','T.I','C.E','P.P.T') NOT NULL,
-Documentoin varchar(100) not null,
-Emailin varchar(100) not null,
-Usuarioin  varchar(100) not null,
-Contraseñain  varchar(100) not null
+CREATE TABLE Instructores (
+    Idins INT AUTO_INCREMENT PRIMARY KEY,
+    Nombreins VARCHAR(50) NOT NULL,
+    Apellidoins varchar(100) NOT NULL,
+	Identificacionins enum('C.C','C.E','P.P.T') NOT NULL,
+	Documentoins varchar(100) NOT NULL,
+	Emailins varchar(100) NOT NULL,
+	Usuario varchar(100) NOT NULL,
+    Contraseña VARCHAR(255) NOT NULL
 );
-describe Instructores;
+
+
+CREATE TABLE Administradores (
+    Idad INT AUTO_INCREMENT PRIMARY KEY,
+    Nombread VARCHAR(50) NOT NULL,
+    Apellidoad varchar(100) not null,
+	Identificacionad enum('C.C','C.E','P.P.T') NOT NULL,
+	Documentoad varchar(100) NOT NULL,
+	Emailad varchar(100) NOT NULL,
+	Usuario  varchar(100) NOT NULL,
+    Contraseña VARCHAR(255) NOT NULL
+);
 
 create table Tabletas(
 CodEquipo int primary key auto_increment not null,
@@ -36,19 +46,12 @@ Tableta enum('PEN TABLET PTH-65','PEN TABLET PTH-850','Wacom One') NOT NULL,
 Usua int unique
 );
 
-create table Administrador(
-idAdministrador int primary key auto_increment not null,
-Anotaciones varchar(100),
-idUsuario int,
-codequipo int
-);
-
 CREATE TABLE Reservas (
     IDReserva INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     IDUsuario INT,
     CodEquipo INT,
     Fichausu VARCHAR(100) NOT NULL,
     FechaReserva TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (IDUsuario) REFERENCES Usuario(IDUsuario),
+    FOREIGN KEY (IDUsuario) REFERENCES Usuario(Idusu),
     FOREIGN KEY (CodEquipo) REFERENCES Tabletas(CodEquipo)
 	ON DELETE SET NULL);
