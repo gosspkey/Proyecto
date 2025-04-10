@@ -9,24 +9,26 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="../img/logo-blanco.png" alt="Logo" width="300px" style="position: relative; left: -20px;"class="d-inline-block align-top">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a style="position: relative; left: 170px;" class="nav-link" href="../principal/centro de ayuda.html">Ayuda</a>
-                    </li>
-                </ul>
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="../img/SENA-TECNO.png  " alt="Logo" width="300px" style="position: relative; left: -20px;" class="d-inline-block align-top">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link px-3" href="../principal/equipos.html">inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3"href="../principal/centro de ayuda.html">Ayuda</a>
+                        </li>
+                    </ul>
+                </div>
+               
             </div>
-           
-        </div>
-        <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
-    </nav>
+</nav>
 
     <?php
 session_start(); // Reanuda la sesión
@@ -98,6 +100,7 @@ echo "<a href='actuacontrase.php'?id=" . htmlspecialchars($_SESSION['Idusu']) . 
         footer {
             background-color: #5EA617;
             color: white;
+            margin-bottom: 0 !important;
         }
         footer a {
             color: white;
@@ -105,9 +108,14 @@ echo "<a href='actuacontrase.php'?id=" . htmlspecialchars($_SESSION['Idusu']) . 
         footer p, footer h2, footer strong {
             color: white !important;
         }
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
     </style>
-    <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
-            <img class="footer-logo" src="../img/tecno sena logo blanco.PNG" alt="Logo">
+        <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
+            <img class="footer-logo" src="../img/LOGO SENA-TECCNO.png" alt="Logo" width="600px">
             <h2>Tecno-Sena</h2>
             <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
         </div>
@@ -123,19 +131,20 @@ echo "<a href='actuacontrase.php'?id=" . htmlspecialchars($_SESSION['Idusu']) . 
                 <p> 
                     <strong>Telefono:</strong> 
                     <br> 
-                    +573222175535
+                    +573012845024
                 </p>
             </div>
             <div class="iconos ema col-md-2">
                 <p>
                     <strong>Correo:</strong>
                     <br>
-                    equipoceni@soy.sena.edu.co
+                    soportecenigraf2025@gmail.com
                 </p>
             </div>
         </div>
-        <img src="../img/sena logo blamco.png" alt="Logo" width="300px" style="position: relative; left: -100px;" class="d-inline-block align-top">
-    </footer>
+            <div class="iconos ema col-md-2">
+    </div>
+</footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
