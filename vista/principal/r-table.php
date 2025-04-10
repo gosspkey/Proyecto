@@ -23,10 +23,10 @@ $tabletas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>TECNO-SENA</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../img/logo-blanco.png" alt="Logo" width="300px" style="position: relative; left: -20px;" class="d-inline-block align-top">
+                <img src="../img/SENA-TECNO.png" alt="Logo" width="300px" style="position: relative; left: -20px;" class="d-inline-block align-top">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -34,12 +34,14 @@ $tabletas = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a style="position: relative; left: 170px;" class="nav-link" href="#">Ayuda</a>
+                        <a class="nav-link px-3" href="../principal/equipos.html">inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="../principal/centro de ayuda.html">Ayuda</a>
                     </li>
                 </ul>
             </div>
         </div>
-        <img src="../img/sena logo blamco.png" alt="Logo" width="120px" class="d-inline-block align-top" style="position: relative; left: -100px;">
     </nav>
 
     <form action="../../controlador/reservacont.php" method="POST" class="container">
@@ -69,11 +71,11 @@ $tabletas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <div class="d-flex justify-content-center button-center">
             <div class="button">
-                <button class="btn custom-button" type="submit" onclick="return showAlert()">Reservar</button>
+                <button class="btn btn-successs custom-button" type="submit" onclick="return showAlert()">Reservar</button>
             </div>
             <div class="button">
                 <a href="../principal/equipos.html">
-                    <button class="btn custom-button" type="button">Cancelar</button>
+                    <button class="btn btn-successs custom-button" type="button">Cancelar</button>
                 </a>
             </div>
         </div>
@@ -86,6 +88,7 @@ $tabletas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         footer {
             background-color: #5EA617;
             color: white;
+            margin-bottom: 0 !important;
         }
         footer a {
             color: white;
@@ -93,36 +96,42 @@ $tabletas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         footer p, footer h2, footer strong {
             color: white !important;
         }
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
     </style>
-    <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
-        <img class="footer-logo" src="../img/tecno sena logo blanco.PNG" alt="Logo">
-        <h2>Tecno-Sena</h2>
-        <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
+        <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
+            <img class="footer-logo" src="../img/LOGO SENA-TECCNO.png" alt="Logo" width="600px">
+            <h2>Tecno-Sena</h2>
+            <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
+        </div>
+        <div class="container d-flex justify-content-around py-3">
+            <div class="iconos dire col-md-2">
+                <p>
+                    <strong>Dirección:</strong>  
+                    <br> 
+                    #31-42 Calle 15, Bogotá
+                </p>
+            </div>
+            <div class="iconos tel col-md-2">
+                <p> 
+                    <strong>Telefono:</strong> 
+                    <br> 
+                    +573012845024
+                </p>
+            </div>
+            <div class="iconos ema col-md-2">
+                <p>
+                    <strong>Correo:</strong>
+                    <br>
+                    soportecenigraf2025@gmail.com
+                </p>
+            </div>
+        </div>
+            <div class="iconos ema col-md-2">
     </div>
-    <div class="container d-flex justify-content-around py-3">
-        <div class="iconos dire col-md-2">
-            <p>
-                <strong>Dirección:</strong>  
-                <br> 
-                #31-42 Calle 15, Bogotá
-            </p>
-        </div>
-        <div class="iconos tel col-md-2">
-            <p> 
-                <strong>Telefono:</strong> 
-                <br> 
-                +573222175535
-            </p>
-        </div>
-        <div class="iconos ema col-md-2">
-            <p>
-                <strong>Correo:</strong>
-                <br>
-                equipoceni@soy.sena.edu.co
-            </p>
-        </div>
-    </div>
-    <img src="../img/sena logo blamco.png" alt="Logo" width="300px" style="position: relative; left: -100px;" class="d-inline-block align-top">
 </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
