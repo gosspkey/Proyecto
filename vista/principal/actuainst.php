@@ -36,27 +36,26 @@
     $database = new Database();
     $conn = $database->getConnection();
     $instructorObj = new Instructores($conn);
+    $instructorData = null;
 
     // Verificar si hay un ID para editar
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-
-        // Obtener los datos del instructor
-        $stmt = $instructorObj->listarins(); // Asegúrate de tener este método
-        $instructorData = null;
+    
+        // Obtener los datos del usuario
+        $stmt = $instructorObj->listarins();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if ($row['Idins'] == $id) {
                 $instructorData = $row;
                 break;
             }
         }
-
+    
         if (!$instructorData) {
-            echo "Instructor no encontrado.";
+            echo "Usuario no encontrado.";
             exit();
         }
     }
-
     // Si se envía el formulario, actualizar el instructor
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $instructorObj->id = $_POST['id'];
@@ -79,9 +78,9 @@
     }
     ?>
 
-    <form method="POST" action="actuainst.php" method="POST" class="container">
+    <form method="POST" action="actuainst.php?id=<?= $instructorData['Idins'] ?>" class="container">
         <input type="hidden" name="id" value="<?= $instructorData['Idins'] ?>">
-        <h2 class="titulo text-center"> <strong>Actualizar Usuario</strong></h2>
+        <h2 class="titulo text-center"> <strong>Actualizar instructor</strong></h2>
 
         <div class="row">
             <div class="container mt-5 col-md-6 form1 form-group">
