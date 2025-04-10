@@ -111,7 +111,7 @@ class Usuario {
         $stmt->execute([$nombre, $apellido, $identi, $documento, $telefono, $correo, $ficha, $usuario, $contraseña]);
 
         return "Usuario registrado correctamente";
-        header("Location: ../vista/iniciosesion.html");
+        header("Location: ../../vista/iniciosesion.html");
     }
 }
 
@@ -131,8 +131,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contraseña = password_hash($_POST['contraseña'], PASSWORD_BCRYPT);
 
     $resultado = $usuarioObj->registrar($nombre, $apellido, $identi, $documento, $telefono, $correo, $ficha, $usuario, $contraseña);
-    if (str_starts_with($resultado, "")) {
-        header("Location: ../../vista/iniciosesion.html");
+    if ($resultado === "Usuario registrado correctamente.") {
+        header("Location: ../vista/iniciosesion.html");
         exit();
     } else {
         echo $resultado;
