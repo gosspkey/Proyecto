@@ -1,6 +1,6 @@
 <?php
 
-require_once "../confi/conexion.php";
+require_once __DIR__ . '/../confi/conexion.php';
 session_start(); // Asegúrate de iniciar sesión
 
 // Obtener la conexión a la base de datos

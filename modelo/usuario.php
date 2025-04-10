@@ -79,6 +79,36 @@ class Usuario {
             return false;
         }
     }
+    public function actualizarapr() {
+        $query = "UPDATE " . $this->table . " SET 
+            Nombreusu = :nombre,
+            Apellidousu = :apellido,
+            Telefonousu = :telefono,
+            Emailusu = :email,
+            Usuario = :usuario
+            WHERE Idusu = :id";
+    
+        $stmt = $this->conn->prepare($query);
+    
+    
+        // Vincular parámetros
+        $stmt->bindParam(':nombre', $this->nombre);
+        $stmt->bindParam(':apellido', $this->apellido);
+        $stmt->bindParam(':telefono', $this->telefono);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':usuario', $this->usuario);
+        $stmt->bindParam(':id', $this->id);
+    
+        // Ejecutar la consulta
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            $errorInfo = $stmt->errorInfo();
+            echo "Error al ejecutar la consulta: " . $errorInfo[2];
+            return false;
+        }
+    }
+
     
 
     // Función para obtener un solo usuario por ID

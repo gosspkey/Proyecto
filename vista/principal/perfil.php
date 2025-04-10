@@ -30,7 +30,7 @@
 
     <?php
 session_start(); // Reanuda la sesión
-if (isset($_SESSION['id'])) {
+if (isset($_SESSION['Idusu'])) {
     // Conexión a la base de datos
     include_once '../../modelo/usuario.php';
     $host = "localhost";
@@ -47,7 +47,7 @@ if (isset($_SESSION['id'])) {
 
     // Crear la instancia de la clase Usuario
     $usuario = new Usuario($conn);
-    $usuario->id = $_SESSION['id']; // Obtener el ID desde la sesión
+    $usuario->id = $_SESSION['Idusu']; // Obtener el ID desde la sesión
 
     // Obtener los detalles del usuario
     $stmt = $usuario->Usuuno();
@@ -57,7 +57,7 @@ if (isset($_SESSION['id'])) {
      ?>
      <div class="container text-center mt-5 d-flex align-items-center justify-content-center">   
         <img src="../img/perfil.png" alt="Perfil" class="img-perfil img-fluid">
-        <h1 class="titulo-perfil"> Hola <?php echo htmlspecialchars($data['Nombre']) . " " . htmlspecialchars($data['Apellido']); ?>!</h1>
+        <h1 class="titulo-perfil"> Hola <?php echo htmlspecialchars($data['Nombreusu']) . " " . htmlspecialchars($data['Apellidousu']); ?>!</h1>
     </div>
     <div class="container text-center mt-3">
         <button class="btn btn-perfil" type="button" data-toggle="collapse" data-target="#infoUsuario" aria-expanded="false" aria-controls="infoUsuario">
@@ -69,12 +69,11 @@ if (isset($_SESSION['id'])) {
             <h2>Información del usuario</h2>
         <div class="col-eq justify-content-center">
            <?php
-                echo "<p>Identificación: " . htmlspecialchars($data['Identificacion']) . " " . htmlspecialchars($data['Documento']) . "</p>";
-                echo "<p>Teléfono: " . htmlspecialchars($data['Telefono']) . "</p>";
-                echo "<p>Correo: " . htmlspecialchars($data['Email']) . "</p>";
-                echo "<p>Ficha: " . htmlspecialchars($data['Ficha']) . "</p>";
+                echo "<p>Identificación: " . htmlspecialchars($data['Identificacionusu']) . " " . htmlspecialchars($data['Documentousu']) . "</p>";
+                echo "<p>Teléfono: " . htmlspecialchars($data['Telefonousu']) . "</p>";
+                echo "<p>Correo: " . htmlspecialchars($data['Emailusu']) . "</p>";
+                echo "<p>Ficha: " . htmlspecialchars($data['Fichausu']) . "</p>";
                 echo "<p>Usuario: " . htmlspecialchars($data['Usuario']) . "</p>";
-                echo "<p>Rol: " . htmlspecialchars($data['Rol']) . "</p>";
             ?>
         </div>
         </div>
@@ -82,7 +81,7 @@ if (isset($_SESSION['id'])) {
     </div>
 <?php
         // Enlace para actualizar datos
-        echo "<a href='ajustes.php?id=" . htmlspecialchars($_SESSION['id']) . "' class='btn btn-success custom-button'>Hazlo aquí</a>";
+        echo "<a href='ajustes.php?id=" . htmlspecialchars($_SESSION['Idusu']) . "' class='btn btn-success custom-button'>Hazlo aquí</a>";
     } else {
         echo "No se encontró información del usuario.";
     }
@@ -90,7 +89,7 @@ if (isset($_SESSION['id'])) {
     echo "No has iniciado sesión. Por favor, ingresa.";
 }
 
-echo "<a href='actuacontrase.php'?id=" . htmlspecialchars($_SESSION['id']) . "' class='btn btn-success custom-button'>Cambia tu contraseña</a>";
+echo "<a href='actuacontrase.php'?id=" . htmlspecialchars($_SESSION['Idusu']) . "' class='btn btn-success custom-button'>Cambia tu contraseña</a>";
 
 ?>
 

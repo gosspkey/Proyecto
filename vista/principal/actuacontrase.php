@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['Idusu'])) {
     echo "No has iniciado sesión. Por favor, ingresa.";
     exit;
 }
@@ -26,8 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Verificar la contraseña actual
-        $stmt = $conn->prepare("SELECT Contraseña FROM Usuario WHERE IDUsuario = :id");
-        $stmt->bindParam(':id', $_SESSION['id'], PDO::PARAM_INT);
+        $stmt = $conn->prepare("SELECT Contraseña FROM Usuario WHERE Idusu = :id");
+        $stmt->bindParam(':id', $_SESSION['Idusu'], PDO::PARAM_INT);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -38,12 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Actualizar la contraseña
         $hashed_password = password_hash($contranueva, PASSWORD_DEFAULT);
-        $update_stmt = $conn->prepare("UPDATE Usuario SET Contraseña = :contranueva WHERE IDUsuario = :id");
+        $update_stmt = $conn->prepare("UPDATE Usuario SET Contraseña = :contranueva WHERE Idusu = :id");
         $update_stmt->bindParam(':contranueva', $hashed_password, PDO::PARAM_STR);
         $update_stmt->bindParam(':id', $_SESSION['id'], PDO::PARAM_INT);
 
         if ($update_stmt->execute()) {
             echo "Contraseña actualizada correctamente.";
+            header("Location: perfil.php");
         } else {
             echo "Error al actualizar la contraseña.";
         }
@@ -89,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="password" class="form-control" id="contranueva" name="contranueva" required>
 
                     <label for="contraseña" class="mb-2 mt-3">Confirma contraseña nueva:</label>
-                    <input type="password" class="form-control" id="confirmarcontra" name="confirm_password" required>
+                    <input type="password" class="form-control" id="confirmarcontra" name="confirmarcontra" required>
 
                     <div class="text-center mt-4">
                         <button  class="btn btnn btn-successs customm-button btninicio" type="submit" style="width: 50%;">Cambiar contraseña</button>

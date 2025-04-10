@@ -31,58 +31,110 @@
     </nav>
 
     <?php
-    require_once('../../modelo/usuario.php');
-    require_once('../../confi/conexion.php');
+    require_once '../../confi/conexion.php';
+    require_once '../../modelo/usuario.php';
+    
     $database = new Database();
-    $db = $database->getConnection();
-    $usuario = new Usuario($db);
-
-    if(isset($_GET['id'])){
+    $conn = $database->getConnection();
+    $usuarioObj = new Usuario($conn);
+    
+    // Verificar si hay un ID para editar
+    if (isset($_GET['id'])) {
         $id = $_GET['id'];
-        $usuario->id = $id;
-        $data = $usuario->Usuuno();
-        $fila = $data->fetch(PDO::FETCH_ASSOC);
+    
+        // Obtener los datos del usuario
+        $stmt = $usuarioObj->listarusu();
+        $usuarioData = null;
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if ($row['Idusu'] == $id) {
+                $usuarioData = $row;
+                break;
+            }
+        }
+    
+        if (!$usuarioData) {
+            echo "Usuario no encontrado.";
+            exit();
+        }
     }
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $usuario->id = $_POST['IDUsuario'];
-        $usuario->nombre = $_POST['nombre'];
-        $usuario->apellido = $_POST['apellido'];
-        $usuario->telefono = $_POST['telefono'];
-        $usuario->email = $_POST['correo'];
-        $usuario->usuario = $_POST['usuario'];
-
-        if ($usuario->actualizarapr()) {
-            echo "Usuario actualizado correctamente.";
+    
+    // Si se envía el formulario, actualizar el usuario
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $usuarioObj->id = $_POST['id'];
+        $usuarioObj->nombre = $_POST['nombre'];
+        $usuarioObj->apellido = $_POST['apellido'];
+        $usuarioObj->identi = $_POST['identi'];
+        $usuarioObj->documento = $_POST['documento'];
+        $usuarioObj->email = $_POST['correo'];
+        $usuarioObj->telefono = $_POST['telefono'];
+        $usuarioObj->usuario = $_POST['usuario'];
+        $usuarioObj->ficha = $_POST['ficha'];
+        $usuarioObj->contra = $_POST['contraseña']; // El método ya lo hashea
+    
+        $resultado = $usuarioObj->actualizar();
+    
+        if ($resultado) {
+            header("Location: perfil.php");
+            exit;
         } else {
-            echo "Error al actualizar el usuario.";
+            echo "Error al actualizar.";
         }
     }
     ?>
 
-    <form action="ajustes.php?id=<?php echo $usuario->id; ?>" method="POST" class="container">
-        <input type="hidden" name="IDUsuario" value="<?php echo $fila['IDUsuario']; ?>">
-        <h2 class="titulo text-center"> <strong>Actualiza tus datos</strong></h2>
-        <div class="row">
-            <div class="container mt-5 col-md-6 form1 form-group">
-                <label for="nombre" class="mr-2">Nombre(s):</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" value="<?php echo htmlspecialchars($fila['Nombre'] ?? ''); ?>" required>
+<form method="POST" action="ajustes.php" method="POST" class="container">
+    <input type="hidden" name="id" value="<?= $usuarioData['Idusu'] ?>">
+    <h2 class="titulo text-center"> <strong>Actualizar Usuario</strong></h2>
+    <div class="row">
+        <div class="container mt-5 col-md-6 form1 form-group">
+        <label for="nombre" class="mr-2">Nombre(s):</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $usuarioData['Nombreusu'] ?>" required>
 
-                <label for="apellido" class="mr-2">Apellidos:</label>
-                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingrese sus apellidos" value="<?php echo htmlspecialchars($fila['Apellido'] ?? ''); ?>" required>
+        <label for="apellido" class="mr-2">Apellidos:</label>
+        <input type="text" class="form-control" id="apellido" name="apellido" value="<?= $usuarioData['Apellidousu'] ?>" required>
 
-                <label for="telefono" class="mr-2">Telefono:</label>
-                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Ingrese numero de contacto" value="<?php echo htmlspecialchars($fila['Telefono'] ?? ''); ?>" required>
-                
-                <label for="correo" class="mr-2">Correo electronico:</label>
-                <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese correo" value="<?php echo htmlspecialchars($fila['Email'] ?? ''); ?>" required>
+        <label>Identificación:</label>
+        <select type="text" class="form-control" id="identi" name="identi" value="<?= $usuarioData['Identificacionusu'] ?>" required>
+            <option value="">Tipo de documento</option>
+                <option value="C.C">C.C</option>
+                <option value="T.I">T.I</option>
+                <option value="C.E">C.E</option>
+                <option value="P.P.T">P.P.T
+            </option>
+        </select>
 
-                <label for="usuario" class="mr-2">Nombre de usuario:</label>
-                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingrese un usuario" value="<?php echo htmlspecialchars($fila['Usuario'] ?? ''); ?>" required>
+        <label for="documento" class="mr-2">Numero de documento:</label>
+        <input type="text"class="form-control" id="documento" name="documento" value="<?= $usuarioData['Documentousu'] ?>" required>
 
-                </script>
-            </div>
-        </div>
+        <label for="telefono" class="mr-2">Telefono:</label>
+        <input type="text" class="form-control" id="telefono" name="telefono" value="<?= $usuarioData['Telefonousu'] ?>" required>
+    </div>
+
+    <div class="container mt-5 col-md-6 form1 form-group">
+
+        <label for="correo" class="mr-2">Correo electronico:</label>
+        <input type="email" class="form-control" id="correo" name="correo" value="<?= $usuarioData['Emailusu'] ?>" required>
+
+        <label for="ficha" class="mr-2">Ficha:</label>
+        <input type="text" class="form-control" id="ficha" name="ficha" value="<?= $usuarioData['Fichausu'] ?>" required>
+
+        <label>Usuario:</label>
+        <input type="text" class="form-control" id="usuario" name="usuario" value="<?= $usuarioData['Usuario'] ?>" required>
+
+        <label for="contraseña" class="mr-2">Contraseña:</label>
+        <input type="password" class="form-control" id="contraseña" name="contraseña" required>
+
+        <span class="vercontra" onclick="vercontra('contraseña', this)">👁️‍🗨️</span>
+        <script>
+            function vercontra(id, element) {
+                const passwordInput = document.getElementById(id);
+                const passwordType = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', passwordType);
+                // Cambiar el símbolo de la lectura de la contraseña
+                element.textContent = passwordType === 'password' ? '👁️‍🗨️' : '👀';
+            }
+        </script>
+    </div>
         <div class="text-center mt-4">
             <button class="btn btn-success custom-button" type="submit">Guardar cambios</button>
         </div>
