@@ -62,54 +62,82 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+    <div class="container mt-5 mb-5 text-center">
+        <h1 class="text-center">Centro de ayuda</h1>
+        <p class="text-center">Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos.</p>
+    </div>
+    <form class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <img class="footer-logo"  src="../img/LOGO SENA-TECCNO.png" alt="Logo" width="600px">
+                    <h2>Tecno-Sena</h2>
+                    <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
+                    <p>
+                        <strong>Dirección:</strong>  
+                        <br> 
+                        #31-42 Calle 15, Bogotá
+                    </p>
+                    <p> 
+                        <strong>Telefono:</strong> 
+                        <br> 
+                        +573222175535
+                    </p>
+                    <p>
+                        <strong>Correo:</strong>
+                        <br>
+                        equipoceni@soy.sena.edu.co
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label for="comentarios">Deja tu comentario:</label>
+                    <textarea class="form-control" id="comentarios" rows="5" placeholder="Escribe aquí tus comentarios..."></textarea>
+                    <input type="text" class="form-control mt-3" id="usuarioId" placeholder="Ingresa tu ID de usuario">
+                    <button type="button" class="btn btn-primary mt-3" id="enviarComentario">Enviar</button>
+                </div>
+                <div id="comentariosRegistrados" class="mt-4">
+                    <h3>Comentarios:</h3>
+                    <ul id="listaComentarios" class="list-unstyled"></ul>
+                </div>
+                <script>
+                    // Cargar comentarios almacenados en localStorage al cargar la página
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const comentariosGuardados = JSON.parse(localStorage.getItem('comentarios')) || [];
+                        const listaComentarios = document.getElementById('listaComentarios');
+                        comentariosGuardados.forEach(comentario => {
+                            const nuevoComentario = document.createElement('li');
+                            nuevoComentario.textContent = `ID ${comentario.usuarioId}: ${comentario.texto}`;
+                            listaComentarios.appendChild(nuevoComentario);
+                        });
+                    });
+
+                    document.getElementById('enviarComentario').addEventListener('click', function() {
+                        const comentario = document.getElementById('comentarios').value.trim();
+                        const usuarioId = document.getElementById('usuarioId').value.trim();
+                        if (comentario && usuarioId) {
+                            const listaComentarios = document.getElementById('listaComentarios');
+                            const nuevoComentario = document.createElement('li');
+                            nuevoComentario.textContent = `ID ${usuarioId}: ${comentario}`;
+                            listaComentarios.appendChild(nuevoComentario);
+
+                            // Guardar el comentario en localStorage
+                            const comentariosGuardados = JSON.parse(localStorage.getItem('comentarios')) || [];
+                            comentariosGuardados.push({ usuarioId, texto: comentario });
+                            localStorage.setItem('comentarios', JSON.stringify(comentariosGuardados));
+
+                            document.getElementById('comentarios').value = ''; // Limpiar el textarea
+                            document.getElementById('usuarioId').value = ''; // Limpiar el campo de ID
+                        } else {
+                            alert('Por favor, escribe un comentario y proporciona tu ID de usuario antes de enviarlo.');
+                        }
+                    });
+                </script>
 </body>
-</form>
+
 
 </form>
-<footer class="mt-5 border-top">
-    <style>
-        footer {
-            background-color: #5EA617;
-            color: white;
-        }
-        footer a {
-            color: white;
-        }
-        footer p, footer h2, footer strong {
-            color: white !important;
-        }
-    </style>
-    <div class="container text-center py-4 col-md-2 footer-container" style="margin-top: 2px;">
-        <img class="footer-logo"  src="../img/LOGO SENA-TECCNO.png" alt="Logo" width="600px">
-        <h2>Tecno-Sena</h2>
-        <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
-    </div>
-    <div class="container d-flex justify-content-around py-3">
-        <div class="iconos dire col-md-2">
-            <p>
-                <strong>Dirección:</strong>  
-                <br> 
-                #31-42 Calle 15, Bogotá
-            </p>
-        </div>
-        <div class="iconos tel col-md-2">
-            <p> 
-                <strong>Telefono:</strong> 
-                <br> 
-                +573222175535
-            </p>
-        </div>
-        <div class="iconos ema col-md-2">
-            <p>
-                <strong>Correo:</strong>
-                <br>
-                equipoceni@soy.sena.edu.co
-            </p>
-        </div>
-    </div>
-        <div class="iconos ema col-md-2">
-</div>
-</footer>
+
+</form> 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
