@@ -66,7 +66,7 @@
         <h1 class="text-center">Centro de ayuda</h1>
         <p class="text-center">Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos.</p>
     </div>
-    <form class="container mb-5">
+    <form class="container mb-5" style="background-color: rgb(185, 228, 185);">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="form-group">
@@ -106,7 +106,7 @@
                         const listaComentarios = document.getElementById('listaComentarios');
                         comentariosGuardados.forEach(comentario => {
                             const nuevoComentario = document.createElement('li');
-                            nuevoComentario.textContent = `ID ${comentario.usuarioId}: ${comentario.texto}`;
+                            nuevoComentario.innerHTML = `<div class="border p-3 mb-2 rounded bg-light">ID ${comentario.usuarioId}: ${comentario.texto}</div>`;
                             listaComentarios.appendChild(nuevoComentario);
                         });
                     });
@@ -117,7 +117,7 @@
                         if (comentario && usuarioId) {
                             const listaComentarios = document.getElementById('listaComentarios');
                             const nuevoComentario = document.createElement('li');
-                            nuevoComentario.textContent = `ID ${usuarioId}: ${comentario}`;
+                            nuevoComentario.innerHTML = `<div class="border p-3 mb-2 rounded bg-light">ID ${usuarioId}: ${comentario}</div>`;
                             listaComentarios.appendChild(nuevoComentario);
 
                             // Guardar el comentario en localStorage
