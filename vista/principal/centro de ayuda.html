@@ -70,7 +70,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="form-group">
-                    <img class="footer-logo"  src="../img/LOGO SENA-TECCNO.png" alt="Logo" width="600px">
+                    <img class="footer-logo" src="../img/LOGO SENA-TECCNO.png" alt="Logo" width="600px">
                     <h2>Tecno-Sena</h2>
                     <p>Atención al cliente:<br>Lunes a viernes de 8:00am a 5:00pm</p>
                     <p>
@@ -100,39 +100,52 @@
                     <ul id="listaComentarios" class="list-unstyled"></ul>
                 </div>
                 <script>
-                    // Cargar comentarios almacenados en localStorage al cargar la página
+                    // Cargar comentarios desde el servidor al cargar la página
                     document.addEventListener('DOMContentLoaded', function() {
-                        const comentariosGuardados = JSON.parse(localStorage.getItem('comentarios')) || [];
-                        const listaComentarios = document.getElementById('listaComentarios');
-                        comentariosGuardados.forEach(comentario => {
-                            const nuevoComentario = document.createElement('li');
-                            nuevoComentario.innerHTML = `<div class="border p-3 mb-2 rounded bg-light">ID ${comentario.usuarioId}: ${comentario.texto}</div>`;
-                            listaComentarios.appendChild(nuevoComentario);
-                        });
+                        fetch('https://tecno-sena-g9g9dugbetfqemga.canadacentral-01.azurewebsites.net/') // Cambia esta URL por la de tu servidor
+                            .then(response => response.json())
+                            .then(comentarios => {
+                                const listaComentarios = document.getElementById('listaComentarios');
+                                comentarios.forEach(comentario => {
+                                    const nuevoComentario = document.createElement('li');
+                                    nuevoComentario.innerHTML = `<div class="border p-3 mb-2 rounded bg-light">ID ${comentario.usuarioId}: ${comentario.texto}</div>`;
+                                    listaComentarios.appendChild(nuevoComentario);
+                                });
+                            })
+                            .catch(error => console.error('Error al cargar los comentarios:', error));
                     });
 
                     document.getElementById('enviarComentario').addEventListener('click', function() {
                         const comentario = document.getElementById('comentarios').value.trim();
                         const usuarioId = document.getElementById('usuarioId').value.trim();
                         if (comentario && usuarioId) {
-                            const listaComentarios = document.getElementById('listaComentarios');
-                            const nuevoComentario = document.createElement('li');
-                            nuevoComentario.innerHTML = `<div class="border p-3 mb-2 rounded bg-light">ID ${usuarioId}: ${comentario}</div>`;
-                            listaComentarios.appendChild(nuevoComentario);
+                            const nuevoComentario = { usuarioId, texto: comentario };
 
-                            // Guardar el comentario en localStorage
-                            const comentariosGuardados = JSON.parse(localStorage.getItem('comentarios')) || [];
-                            comentariosGuardados.push({ usuarioId, texto: comentario });
-                            localStorage.setItem('comentarios', JSON.stringify(comentariosGuardados));
+                            // Enviar el comentario al servidor
+                            fetch('https://tecno-sena-g9g9dugbetfqemga.canadacentral-01.azurewebsites.net/', { // Cambia esta URL por la de tu servidor
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(nuevoComentario)
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                const listaComentarios = document.getElementById('listaComentarios');
+                                const nuevoComentarioElemento = document.createElement('li');
+                                nuevoComentarioElemento.innerHTML = `<div class="border p-3 mb-2 rounded bg-light">ID ${data.usuarioId}: ${data.texto}</div>`;
+                                listaComentarios.appendChild(nuevoComentarioElemento);
 
-                            document.getElementById('comentarios').value = ''; // Limpiar el textarea
-                            document.getElementById('usuarioId').value = ''; // Limpiar el campo de ID
+                                document.getElementById('comentarios').value = ''; // Limpiar el textarea
+                                document.getElementById('usuarioId').value = ''; // Limpiar el campo de ID
+                            })
+                            .catch(error => console.error('Error al enviar el comentario:', error));
                         } else {
                             alert('Por favor, escribe un comentario y proporciona tu ID de usuario antes de enviarlo.');
                         }
                     });
                 </script>
-</body>
+            </div>
 
 
 </form>
